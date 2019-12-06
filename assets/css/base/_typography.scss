@@ -1,0 +1,51 @@
+/**
+*
+* * Everything that controls typography can be found in this file all in one place
+* TODO: Include custom downloaded font paths below --> Best for speed optimization
+*
+*/
+
+// Font variables
+$font-primary: sans-serif;
+
+// Font mixins
+@mixin font-primary {
+    font-family: $font-primary;
+	font-display: swap;
+}
+
+@mixin font-primary-i {
+    font-family: $font-primary;
+    font-display: swap;
+    font-style: italic;
+}
+
+// Primary font regular
+@font-face {
+	@include font-primary;
+	src: url('assets/fonts/xxx.ttf') format('ttf');
+	font-weight: 300;
+
+}
+
+// Primary font italic
+@font-face {
+	@include font-primary-i;
+	src: url('assets/fonts/xxx.ttf') format('ttf');
+	font-weight: 300;
+}
+
+
+
+html {
+	// ! Makes 1 rem = 10px ( Simplifies dealing with rem to px calcs )
+	font-size: 62.5%; // 10px / 16px = 65.5% 
+}
+
+body {
+	font-family: $font-primary;
+}
+
+
+
+

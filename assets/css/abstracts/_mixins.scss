@@ -1,0 +1,40 @@
+/**
+*
+* * All mixins for project can be found in this file (Except for typography mixins)
+*
+* * --------| Order |-------- *
+*   TODO: Create media queries in the order below
+*   1 Base & Typography
+*   2 Layout & Grid  
+*   3 Page & Layout
+*   4 Components
+*
+* * --------| Media Query Manager: Desktop first approach |-------- * 
+*   TODO: Add your own custom breakppoints, convert px to em for breapoints and use sample calculations below for help
+*   ! ems are the best unit option versus rem for breakpoints --> rems DONT WORK as expected
+*
+* * Breakpoint argument choices ( px to em caclulations )
+*   --> small 0 - 600px  ( 600px / 16 = 37.5em )
+*   --> medium 600 - 800px  ( 800px / 16 = 50em )
+*   --> large 900 - 1000px  ( 1000px / 16 = 62.5em )
+*   --> largest 1100 - 1200px  ( 1200px / 16 = 75em )
+*
+*/
+
+// * --------| Breakpoint Mixin |-------- *
+// TODO: Add breakpoint argument choices below from smallest to largest
+// ! Mobile first uses min-width and works in reverse 
+@mixin respond($breakpoint) {
+    @if $breakpoint == small {
+        @media only screen and (max-width: 37.5em) { @content };  // 600px
+    }
+    @if $breakpoint == medium {
+        @media only screen and (max-width: 50em) { @content };  // 800px
+    }
+    @if $breakpoint == large {
+        @media only screen and (max-width: 62.5em) { @content };  // 1000px
+    }
+    @if $breakpoint == largest {
+        @media only screen and (max-width: 75em) { @content }; // 1200px
+    }
+}

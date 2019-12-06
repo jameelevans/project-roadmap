@@ -1,0 +1,124 @@
+/*
+Theme Name: Starter Wordpress Theme
+Author: Jameel Evans
+Description: This theme was designed and coded by Jameel Evans.
+Version: 1.0
+Text Domain: jameelevans.com
+ */
+/**
+--------------------------------------------------------------
+*! TABLE OF CONTENTS:
+--------------------------------------------------------------
+*  TODO: Import scss modules in the correct area as needed
+*
+* * | Abstracts |
+*   Variables  --> All project variables
+*   Mixins --> All project mixins
+*   Functions --> All project functions
+*
+* * | Base |
+*   Typography   --> All things typography in one place
+*   Base --> Basic project definition
+*   Animations --> All project animations
+*   Utilities --> All utility helper classes
+*
+* * | Components |
+*
+*
+* * | Layout |
+*
+*
+* * | Pages |
+
+
+--------------------------------------------------------------*/
+/**
+*
+* * All variables for project can be found in this file
+*
+*/
+/**
+*
+* * All mixins for project can be found in this file (Except for typography mixins)
+*
+* * --------| Order |-------- *
+*   TODO: Create media queries in the order below
+*   1 Base & Typography
+*   2 Layout & Grid  
+*   3 Page & Layout
+*   4 Components
+*
+* * --------| Media Query Manager: Desktop first approach |-------- * 
+*   TODO: Add your own custom breakppoints, convert px to em for breapoints and use sample calculations below for help
+*   ! ems are the best unit option versus rem for breakpoints --> rems DONT WORK as expected
+*
+* * Breakpoint argument choices ( px to em caclulations )
+*   --> small 0 - 600px  ( 600px / 16 = 37.5em )
+*   --> medium 600 - 800px  ( 800px / 16 = 50em )
+*   --> large 900 - 1000px  ( 1000px / 16 = 62.5em )
+*   --> largest 1100 - 1200px  ( 1200px / 16 = 75em )
+*
+*/
+/**
+*
+* * Everything that controls typography can be found in this file all in one place
+* TODO: Include custom downloaded font paths below --> Best for speed optimization
+*
+*/
+@font-face {
+  font-family: sans-serif;
+  font-display: swap;
+  src: url("assets/fonts/xxx.ttf") format("ttf");
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: sans-serif;
+  font-display: swap;
+  font-style: italic;
+  src: url("assets/fonts/xxx.ttf") format("ttf");
+  font-weight: 300;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: inherit;
+          box-sizing: inherit;
+}
+
+html {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  background-color: orangered;
+  color: white;
+}
+
+.mb-sm {
+  margin-bottom: 2rem;
+}
+
+.mb-md {
+  margin-bottom: 3rem;
+}
+
+.mb-lg {
+  margin-bottom: 4rem;
+}
+
+.mb-hg {
+  margin-bottom: 8rem;
+}

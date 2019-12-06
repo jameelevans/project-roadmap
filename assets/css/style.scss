@@ -1,0 +1,72 @@
+/*
+Theme Name: Starter Wordpress Theme
+Author: Jameel Evans
+Description: This theme was designed and coded by Jameel Evans.
+Version: 1.0
+Text Domain: jameelevans.com
+ */
+
+ /**
+--------------------------------------------------------------
+*! TABLE OF CONTENTS:
+--------------------------------------------------------------
+*  TODO: Import scss modules in the correct area as needed
+*
+* * | Abstracts |
+*   Variables  --> All project variables
+*   Mixins --> All project mixins
+*   Functions --> All project functions
+*
+* * | Base |
+*   Typography   --> All things typography in one place
+*   Base --> Basic project definition
+*   Animations --> All project animations
+*   Utilities --> All utility helper classes
+*
+* * | Components |
+*
+*
+* * | Layout |
+*
+*
+* * | Pages |
+
+
+--------------------------------------------------------------*/
+
+//* --------| Abstracts |--------*//
+
+// * Variables
+@import "abstracts/variables";
+
+ //  * Mixins
+@import "abstracts/mixins";
+
+  //  * Functions
+ // @import "abstracts/functions";
+
+
+//*-------| Base |--------*//
+
+ //  * Typography
+@import "base/typography";
+
+ //  * Global
+ @import "base/base";
+
+//  * Animations
+// @import "base/animations";
+
+//  * Utilities
+@import "base/utilities";
+
+
+//*--------| Components |--------*//
+
+
+
+//*--------| Layouts |--------*//
+
+
+
+//*--------| Pages |--------*//
