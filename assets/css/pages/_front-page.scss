@@ -1,0 +1,534 @@
+.about {
+  padding: 8rem 8vw 25rem 8vw;
+
+  margin-inline: auto;
+
+  @include respond(medium) {
+    padding: 0 0 5rem 0;
+  }
+
+  &__header {
+    background-color: var(--color-green);
+    border-radius: 4rem;
+    color: var(--color-white);
+    padding: 8rem;
+    margin: 0 auto 8rem;
+    text-align: left;
+    max-width: 130rem;
+
+
+    @include respond(medium) {
+      border-radius: 0;
+      margin-bottom: 0;
+      padding: 5rem;
+    }
+
+    p {
+      margin-block-end: var(--bottom-margin);
+
+      @include respond(medium) {
+        text-align: center;
+      }
+    }
+  }
+
+  & .h2__heading {
+
+    @include respond(medium) {
+      text-align: center;
+    }
+  }
+
+
+  &__wrapper {
+    display: grid;
+    grid-template-columns: auto;
+    gap: 8rem;
+    max-width: 130rem;
+    margin: auto;
+
+
+    @include respond(medium) {
+      padding: 0;
+    }
+
+
+    @include respond(largest) {
+      grid-template-rows: auto;
+      grid-template-columns: none;
+    }
+  }
+
+  &__item {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8rem;
+
+    @include respond(medium) {
+      grid-template-columns: auto;
+    }
+
+    &:nth-of-type(odd) .about__details {
+      border-left: 3px solid var(--color-blue);
+      padding-left: 5rem;
+
+
+      @include respond(medium) {
+        border: none;
+        padding-right: 5rem;
+      }
+    }
+
+    &:nth-of-type(even) .about__details {
+      border-right: 3px solid var(--color-blue);
+      padding-right: 5rem;
+      text-align: right;
+
+      @include respond(medium) {
+        border: none;
+        padding-left: 5rem;
+      }
+    }
+
+    &:nth-of-type(even) {
+      direction: rtl;
+
+      @include respond(medium) {
+        direction: ltr;
+      }
+    }
+
+
+
+    img {
+      width: 100%;
+      display: block;
+      border-radius: 1.5rem;
+
+      @include respond(medium) {
+        border-radius: 0;
+      }
+
+
+    }
+
+  }
+
+  &__details {
+    height: 80%;
+    margin: auto;
+    height: fit-content;
+  }
+
+  &__p {
+    line-height: 1.6;
+
+    @include respond(medium) {
+      text-align: center;
+    }
+  }
+
+  &__gradient {
+    position: relative;
+    display: inline-block;
+    height: fit-content;
+
+    &:after {
+      content: '';
+      position: absolute;
+      border-radius: 1.5rem;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      display: inline-block;
+      background: linear-gradient(45deg, rgba(25, 161, 219, .6), rgba(62, 105, 53, .6),
+        );
+
+      @include respond(medium) {
+        border-radius: 0;
+      }
+    }
+  }
+
+}
+
+.staff {
+  padding: 8rem 8vw;
+  text-align: center;
+  min-height: 100%;
+  background: linear-gradient(0deg, rgba(var(--color-grey-a), 0.8), rgba(var(--color-grey-a), 0)), url("assets/img/backgrounds/staff-bg.jpg");
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: bottom;
+
+  &__wrapper {
+    transform: translateY(-25rem);
+
+    @include respond(medium) {
+      transform: none;
+    }
+
+    .h3__heading {
+      font-weight: 500;
+    }
+  }
+
+  &__header {
+    background-color: var(--color-blue);
+    border-radius: 4rem;
+    color: var(--color-white);
+    padding: 8rem;
+    margin: 0 auto 5rem;
+    text-align: center;
+    max-width: 130rem;
+
+
+    @include respond(medium) {
+      border-radius: 0;
+      padding: 5rem;
+
+    }
+
+    p {
+      margin-block-end: var(--bottom-margin);
+
+      @include respond(medium) {
+        text-align: center;
+      }
+    }
+  }
+
+
+
+  @include respond(medium) {
+    padding: 0 0 10rem 0;
+  }
+
+  & .h2__heading {}
+
+  &__content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+    max-width: 130rem;
+    margin: 0 auto;
+  }
+
+  // Member wrapper and link
+  &__member {
+    position: relative;
+    width: 19rem;
+    margin: 3.5rem;
+    text-decoration: none;
+    transition: all .5s ease;
+
+    &:focus {
+      outline: 4px dashed var(--color-teal);
+      outline-offset: 5rem;
+      border-radius: 5rem;
+    }
+
+
+    //Grey overlay - initially invisible 
+    .staff__overlay {
+      content: '';
+      position: absolute;
+      top: 0;
+      height: 99%;
+      width: 100%;
+      left: 0;
+      z-index: 10;
+      opacity: 0;
+      transition: all .5s ease;
+      background-color: var(--color-blue);
+      border-radius: 8px;
+
+      @include respond(medium) {
+        display: none;
+      }
+    }
+
+
+
+    // Grey staff overlay is visible on hover
+    &:focus .staff__overlay,
+    &:hover .staff__overlay {
+      opacity: .8;
+
+    }
+
+    // Reveil staff details on member hover
+    &:focus .staff__details,
+    &:hover .staff__details {
+      opacity: 1;
+    }
+
+    // Reveil staff details on member hover
+    &:focus .staff__name,
+    &:hover .staff__name {
+      bottom: -3.5rem;
+      opacity: 1;
+
+
+    }
+
+
+
+    &:hover .staff__headshot {
+      //filter: blur(2px);
+
+      @include respond(medium) {
+        //filter: blur(0);
+      }
+    }
+
+  }
+
+  &__is-mobile .staff__details {
+    color: var(--color-black);
+    opacity: 1;
+    margin-top: 2.5rem;
+  }
+
+
+  // Staff name for mobile users
+  &__is-mobile .staff__name {
+    font-size: 1.8rem;
+    opacity: 1;
+  }
+
+  // Staff name for mobile users
+  &__is-mobile .staff__title {
+    display: none;
+  }
+
+  // Staff overlay for mobile users
+  &__is-mobile .staff__overlay {
+    display: none;
+  }
+
+  &__is-desktop .staff__details {
+    color: var(--color-white);
+    position: absolute;
+    //padding: 1rem;
+    top: 0;
+    text-align: center;
+    right: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+    display: grid;
+    place-content: center;
+    opacity: 0;
+
+    @include respond(medium) {
+      opacity: 1;
+      position: relative;
+      margin-block-start: 1rem;
+      text-align: center;
+      width: 100%;
+
+    }
+  }
+
+  &__is-desktop .staff__name {
+    font-size: 1.8rem;
+  }
+
+
+  // Headshot image 
+  &__headshot {
+    width: 19rem;
+    position: relative;
+    z-index: 2;
+    filter: grayscale(100%) brightness(115%);
+    border-radius: 8px;
+  }
+
+
+
+  // Staff details wrapper - initially hidden
+  &__details {
+    z-index: 10;
+    width: 18.5rem;
+    transition: all .5s ease;
+
+    @include respond(medium) {
+      opacity: 1;
+      position: relative;
+      margin-block-start: 2rem;
+      width: 100%;
+    }
+
+
+  }
+
+  // Staff details name
+  &__name {
+    font-weight: 600;
+    line-height: 1.2;
+    align-self: center;
+    z-index: 99;
+
+
+    @include respond(medlg) {
+      font-size: $font-body-mobile;
+      text-align: center;
+      opacity: 1;
+    }
+
+    @include respond(medium) {
+      color: var(--color-black);
+    }
+  }
+
+  // Staff title - Hidden on mobile
+  &__title {
+    font-size: 1.3rem;
+
+    @include respond(medium) {
+      display: none;
+    }
+  }
+
+
+
+}
+
+.resources {
+  background-color: var(--color-green);
+  text-align: center;
+  padding: 8rem 8vw;
+
+  .h2__heading {
+    font-weight: 400;
+    color: var(--color-white);
+  }
+
+
+  &__wrapper {
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+    max-width: 130rem;
+    margin: 0 auto 8rem;
+    gap: 8rem;
+
+
+
+
+  }
+
+
+
+
+
+
+
+}
+
+.resource {
+  background-color: var(--color-grey);
+  padding: 5rem 2rem;
+  border-radius: 1.5rem;
+  width: 30rem;
+  text-decoration: none;
+  color: var(--color-black);
+
+
+
+  &:focus .resource__download,
+  &:hover .resource__download {
+    background-color: var(--color-blue);
+  }
+
+  &:focus .resource__icon,
+  &:hover .resource__icon {
+    fill: var(--color-white);
+    transform: translateY(5px) scale(.93);
+  }
+
+  &:focus .resource__name,
+  &:hover .resource__name {
+    color: var(--color-blue);
+  }
+
+  &__download {
+    display: grid;
+    align-items: center;
+    background-color: var(--color-white);
+    height: 13rem;
+    width: 13rem;
+    padding: 2rem;
+    border-radius: 50%;
+    margin: 0 auto;
+    transition: all .5s ease;
+  }
+
+  &__icon {
+
+    margin: 0 auto;
+    fill: var(--color-blue);
+    width: 6.5rem;
+    height: 6.5rem;
+    transition: all .5s ease;
+
+
+  }
+
+  .h4__header {
+    text-transform: uppercase;
+    margin: 1.5rem 0 5px;
+    font-size: 2.5rem;
+    font-weight: 400;
+  }
+
+  &__name {
+    text-decoration: underline;
+    font-weight: 600;
+    font-size: 1.9rem;
+    transition: all .5s ease;
+  }
+
+}
+
+.questions {
+  background-color: var(--color-white);
+  border-radius: 4rem;
+  padding: 5rem;
+  margin-block-start: 2rem;
+  max-width: 130rem;
+  margin: auto;
+
+  .h3__heading {
+    font-weight: 400;
+  }
+
+  p {
+    font-size: $font-body;
+
+
+
+
+  }
+
+  &__email{
+    color: var(--color-black);
+      font-weight: 600;
+      transition: all .5s ease;
+
+      &:hover,
+      &:focus {
+        color: var(--color-blue);
+      }
+
+      &:focus {
+        outline: 1px dashed var(--color-blue);
+        outline-offset: 2px;
+      }
+  }
+}

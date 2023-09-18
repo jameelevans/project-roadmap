@@ -2,19 +2,60 @@
 *,
 *::before,
 *::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
 }
 
 html {
-    box-sizing: border-box;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+
+  a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):not(.footer__social-link):not(.footer__link) {
+    outline: 2px dashed var(--color-white);
+    outline-offset: 1rem;
+  }
 }
 
-// TODO: Test styles --> Remove if working
-body {
-    background-color: orangered;
-    color: white;
+// Selection background color
+::selection {
+  background-color: var(--color-blue);
+  color: var(--color-white);
+}
+
+// Screen reader shortcut link
+.screen-reader-shortcut {
+  position: absolute;
+  top: -1000em;
+
+  &:focus {
+    position: absolute;
+    display: inline-block;
+    top: 4.5rem;
+    left: 8vw;
+    font-size: 1.6rem;
+    padding: 2rem;
+    background-color: var(--color-dark-blue);
+    color: var(--color-white);
+    outline: 2px dashed var(--color-white);
+    overflow: visible;
+    z-index: 1000;
+    text-decoration: none;
+
+    @include respond(medium) {
+      left: 50%;
+      transform: translateX(-50%);
+      top: 10rem;
+      padding: 3rem 5rem;
+      z-index: 99999;
+    }
+  }
 }
 
 
+
+
+
+
+
+body {}

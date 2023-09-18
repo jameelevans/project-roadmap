@@ -1,0 +1,275 @@
+.header {
+  position: relative;
+  width: 100%;
+  padding: 4.2rem 8vw;
+  color: var(--color-white);
+  background-position: center;
+  background-size: cover;
+
+  &::before{
+    content: '';
+    background: linear-gradient(180deg, rgba(0,0,0,0.50) 0%, rgba(0,0,0,0) 50%, rgba(0,0,0,0.50) 100%);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    @include respond(medium) {
+      display: none;
+   
+    }
+  }
+
+
+
+
+
+  // Top header section
+  &__top {
+    display: grid;
+    grid-template-columns: min-content auto;
+    grid-template-areas: "logo nav";
+    z-index: 90;
+    position: relative;
+
+    @include respond(medium) {
+      display: block;
+    }
+
+    &--scrolled{
+      position: fixed;
+      top: 0;
+      width: 100vw;
+      padding: 1rem 8vw;
+      align-items: center;
+      right: 0;
+      z-index: 99;
+      background-color: rgba(var(--color-dark-blue-a), 0.95);
+    transition: background-color .3s ease-in-out, transform .3s ease-in-out;
+
+      @include respond(medium) {
+        //display: none;
+        position: relative;
+        width: auto;      
+        padding: 0;
+        background-color: transparent;
+      }
+
+      & .header__icon{
+        transform: scale(0.8) translateY(5px);
+
+        @include respond(medium) {
+          transform: none;
+        }
+      }
+
+    }
+
+   
+  }
+
+  // Header logo
+  &__logo {
+    margin: auto 8rem auto 0;
+    padding: 0;
+    height: auto;
+    grid-area: logo;
+    place-self: center;
+
+    @include respond(medium) {
+      /* Center child horizontally*/
+      display: flex;
+      justify-content: center;
+      margin: 5rem 0;
+    }
+  }
+
+  // Header icon
+  &__icon {
+    width: 20rem;
+
+    @include respond(medium){
+      z-index: 9999;
+      width: 30rem
+    }
+  }
+
+  // Header content section
+  &__content {
+    padding: 8vw 0;
+    width: 50rem;
+    z-index: 80;
+    position: relative;
+
+    @include respond(large) {
+      width: 55%;
+    }
+
+    @include respond(medium) {
+      width: 100%;
+      padding: 0 0 5rem;
+      text-align: center;
+    }
+  }
+
+  // Header main heading
+  &__heading {
+    font-size: 4.5rem;
+    margin-bottom: 2.5rem;
+    text-transform: uppercase;
+    line-height: 1.1;
+  
+
+
+    @include respond(large) {
+      font-size: 4rem;
+    }
+  }
+
+  // Header description
+  &__description {
+
+    font-size: 2.5rem;
+    margin-bottom: 2.5rem;
+
+    @include respond(medium) {
+      font-size: 2.9rem;
+    }
+  }
+
+   // Header Lists
+  &__list {
+    font-size: 2.5rem;
+    padding-left: 3rem;
+    list-style: none;
+
+    @include respond(medium) {
+      font-size: 2.9rem;
+    }
+  }
+
+   // Header list items
+  &__item {
+
+    &:not(:last-of-type) {
+      margin-block-end: 4rem;
+    }
+  }
+
+   // Header list check mark
+  &__item:before {
+    content: '✓';
+    margin: 0 1rem 0 -2.8rem;
+  }
+
+   // Header CTA wrapper
+  &__cta--wrapper {
+    display: block;
+    font-size: 2.2rem;
+    
+
+    &:not(:last-of-type) {
+      margin-block-end: 4rem;
+    }
+
+  
+  }
+
+  // Header CTA
+  &__cta {
+    position: relative;
+    text-decoration: none;
+    color: var(--color-white);
+    font-size: 2.2rem;
+    padding-bottom: 2px;
+    font-weight: bold;
+    height: 1.8rem;
+    transition: all .3s ease-in-out;
+
+    @include respond(large) {
+      font-size: 2.5rem;
+    }
+
+
+    &:hover~ .header__arrow {
+      transform: translate(5px, 18%);
+    }
+
+    
+
+    
+  }
+
+  // Header CTA arrow
+  &__arrow {
+    fill: var(--color-white);
+    height: 2.4rem;
+    width: 2.4rem;
+    margin-left: .8rem;
+    transform: translate(0, 18%);
+    transition: all .3s ease-in-out;
+
+    @include respond(small) {
+      display: none;
+    }
+  }
+
+}
+
+// Home header
+.home-header {
+
+  // Header gradient overlay
+  &::after {
+    position: absolute;
+    mix-blend-mode: screen;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    content: '';
+    background-image: radial-gradient(circle at 100% 100%,
+        var(--color-teal),
+        var(--color-dark-blue) 70%,
+        var(--color-dark-blue));
+    z-index: -1;
+
+    @include respond(medium) {
+      display: none;
+      visibility: hidden;
+    }
+  }
+}
+
+// General header
+.general-header {
+
+  @include respond(medium) {
+    background-image: linear-gradient(256deg, rgba(var(--color-green-a), 0.85) -0.04%, rgba(var(--color-dark-blue-a), 0.75) 51.45%),
+      url("assets/img/resources-header.jpg");
+  }
+}
+
+// Background video positoning
+.bg-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: -100;
+  opacity: .15;
+
+  @include respond(medium) {
+    display: none;
+  }
+
+  &__content {
+    height: 100%;
+    width: 100%;
+
+    // Makes video fill entire parent while maintaining aspect ratio
+    object-fit: cover;
+  }
+}

@@ -1,0 +1,44 @@
+.backtop {
+  background-color: rgba(var(--color-dark-blue-a), 0.95);
+  padding: 2rem 2.7rem;
+  border-radius: 10rem;
+  height: 6rem;
+  width: 6rem;
+  position: fixed;
+  bottom: 6rem;
+  right: 6rem;
+  z-index: 9999;
+  opacity: 0;
+  transform: scale(0);
+  transition: transform .3s ease-in-out;
+  
+
+        &:focus{
+          outline: 2px dashed var(--color-white);
+          outline-offset: none;
+        }
+
+  @include respond(medium) {
+    bottom: 5rem;
+    right: 3rem;
+
+  }
+
+
+  &:hover .backtop__icon {
+    transform: translate(-43%, -40%);
+  }
+
+  &--is-visible {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  &__icon {
+    fill: var(--color-white);
+    height: 4rem;
+    width: 4rem;
+    transform: translate(-43%, -30%);
+    transition: all .2s ease-in;
+  }
+}

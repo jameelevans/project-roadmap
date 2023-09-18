@@ -39,5 +39,10 @@
     "gulpscripts": "gulp scripts",
     "images": "gulp images",
     "clearCache": "gulp clearCache"
+  },
+  "dependencies": {
+    "debounce": "^1.2.1",
+    "throttle": "^1.0.3",
+    "waypoints": "^4.0.1"
   }
 }

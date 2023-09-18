@@ -1,9 +1,9 @@
 /*
-Theme Name: Starter Wordpress Theme
+Theme Name: Project Roadmap
 Author: Jameel Evans
-Description: This theme was designed and coded by Jameel Evans.
+Description: This theme was designed by Laura Myers, Eduardo Minaya and Randy Grubba and developed by Jameel Evans.
 Version: 1.0
-Text Domain: jameelevans.com
+Text Domain: projectroadmap.com
  */
 
  /**
@@ -63,10 +63,28 @@ Text Domain: jameelevans.com
 
 //*--------| Components |--------*//
 
-
+//  * Back Top
+@import "components/backtop";
 
 //*--------| Layouts |--------*//
+// *Header
+@import "layout/header";
 
+//*navigation
+@import "layout/navigation";
+
+//*footer
+@import "layout/footer";
 
 
 //*--------| Pages |--------*//
+
+//* Login page
+@import "pages/login";
+
+//* Front page
+@import "pages/front-page";
+
+
+//* 404 page
+@import "pages/404-page";

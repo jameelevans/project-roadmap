@@ -5,47 +5,185 @@
 *
 */
 
-// Font variables
-$font-primary: sans-serif;
+// * --------| Font variables |-------- *
+$font-primary: 'Open Sans', sans-serif;
+$font-h1: 4rem;
+$font-h2: 2.4rem;
+$font-h3: clamp(2.6rem, 1.8vw, 3rem);
+$font-h3-mobile: 3rem;
+$font-body: clamp(1.5rem, 1.8vw, 1.8rem);
+$font-body-mobile: 2rem;
+$font-icon-title: 0.8rem;
+$font-icon-body: 0.8rem;
 
-// Font mixins
+.body-text{
+  font-size: $font-body;
+
+  @include respond(medium) {
+    font-size: $font-body-mobile;
+  }
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
+/* Font mixins
 @mixin font-primary {
-    font-family: $font-primary;
+  font-family: $font-primary;
 	font-display: swap;
 }
 
 @mixin font-primary-i {
-    font-family: $font-primary;
-    font-display: swap;
-    font-style: italic;
+	font-family: $font-primary;
+	font-display: swap;
+	font-style: italic;
 }
 
-// Primary font regular
+
+//Included fonts from assets
+
 @font-face {
-	@include font-primary;
-	src: url('assets/fonts/xxx.ttf') format('ttf');
-	font-weight: 300;
-
+  @include font-primary;
+  src: url('assets/fonts/OpenSans-Light.ttf') format("truetype");
+  font-weight: 300;
 }
 
-// Primary font italic
 @font-face {
-	@include font-primary-i;
-	src: url('assets/fonts/xxx.ttf') format('ttf');
-	font-weight: 300;
+  @include font-primary-i;
+  src: url('assets/fonts/OpenSans-LightItalic.ttf') format("truetype");
+  font-weight: 300;
 }
+
+@font-face {
+  @include font-primary;
+  src: url('assets/fonts/OpenSans-Regular.ttf') format("truetype");
+  font-weight: 400;
+}
+
+@font-face {
+  @include font-primary-i;
+  src: url('assets/fonts/OpenSans-Italic.ttf') format("truetype");
+  font-weight: 400;
+}
+
+@font-face {
+  @include font-primary;
+  src: url('assets/fonts/OpenSans-Medium.ttf') format("truetype");
+  font-weight: 500;
+}
+
+@font-face {
+  @include font-primary-i;
+  src: url('assets/fonts/OpenSans-MediumItalic.ttf') format("truetype");
+  font-weight: 500;
+}
+
+@font-face {
+  @include font-primary;
+  src: url('assets/fonts/OpenSans-SemiBold.ttf') format("truetype");
+  font-weight: 600;
+}
+
+@font-face {
+  @include font-primary-i;
+  src: url('assets/fonts/OpenSans-SemiBoldItalic.ttf') format("truetype");
+  font-weight: 600;
+}
+
+@font-face {
+  @include font-primary;
+  src: url('assets/fonts/OpenSans-Bold.ttf') format("truetype");
+  font-weight: 700;
+}
+
+@font-face {
+  @include font-primary-i;
+  src: url('assets/fonts/OpenSans-BoldItalic.ttf') format("truetype");
+  font-weight: 700;
+}
+
+@font-face {
+  @include font-primary;
+  src: url('assets/fonts/OpenSans-ExtraBold.ttf') format("truetype");
+  font-weight: 800;
+}
+
+@font-face {
+  @include font-primary-i;
+  src: url('assets/fonts/OpenSans-ExtraBoldItalic.ttf') format("truetype");
+  font-weight: 800;
+}*/
 
 
 
 html {
 	// ! Makes 1 rem = 10px ( Simplifies dealing with rem to px calcs )
 	font-size: 62.5%; // 10px / 16px = 65.5% 
+
+  @include respond(large){
+		font-size: 58%;
+	}
+
+  
 }
 
 body {
 	font-family: $font-primary;
 }
 
+.icon {
+  display: inline-block;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+}
+
+.h2__heading{
+	font-size: 4rem;
+	font-weight: 600;
+	margin-bottom: 4rem;
+	position: relative;
+	z-index: 5;
+    
+
+}
+
+.h3__heading{
+	font-size: $font-h3;
+	font-weight: 500;
+  margin-block-end:  var( --bottom-margin);
+
+  @include respond(medium) {
+    text-align: center;
+    font-size: $font-h3-mobile;
+  }
 
 
+}
 
+.sticky__heading{
+  
+
+  @include respond(medium){
+		position: sticky;
+    top: 0;
+    z-index: 100;
+	}
+}
+
+// Underline
+.underline {
+  /* I don't know why this is needed, I just added it and it worked in IE Edge. If we remove this width, the gradient breaks in IE Edge */
+  width: calc(100%);
+  background-image: linear-gradient(transparent calc(100% - 3px), var(--color-light-blue) 10px);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  transition: background-image .3s ease-in-out;
+
+  &:hover,
+  &:focus{
+    background-image: linear-gradient(transparent calc(100% - 3px), var(--color-green) 10px);
+    transition: background-image .3s ease-in-out;
+  }
+
+ 
+
+}

@@ -11,7 +11,7 @@
  */
 
 //* Project options
-exports.urlToPreview =  'http://sass-playground.local/'; // Local project URL of your already running WordPress site. Could be something like wpgulp.local or localhost:3000 depending upon your local WordPress setup.
+exports.urlToPreview =  'http://project-roadmap.local/'; // Local project URL of your already running WordPress site. Could be something like wpgulp.local or localhost:3000 depending upon your local WordPress setup.
 exports.productURL = './'; // Theme URL. Leave it like it is, since gulpfile.js lives in the root folder.
 
 //* Style options

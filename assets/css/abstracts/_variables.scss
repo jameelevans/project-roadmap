@@ -5,8 +5,50 @@
 */
 
 // * --------| Color variables |-------- *
-$color-primary: red;
-$color-primary-dark: black;
+:root {
+  --color-blue: #07558C;
+  --color-blue-a: 7, 85, 140;
+
+  --color-dark-blue: #032841;
+  --color-dark-blue-a: 3, 40, 65;
+
+  --color-light-blue: #4C9FD6;
+  --color-light-blue-a: 25, 161, 219;
+
+  --color-teal: #5DA8A1;
+  --color-teal-a: 93, 168, 161;
+
+  --color-dark-teal: #407873;
+
+  --color-green: #3E6935;
+  --color-green-a: 62, 105, 53;
+
+  --color-grey: #E2E5EA;
+  --color-grey-a: 226, 229, 234;
+
+  --color-dark-grey: #44546A;
+  --color-dark-grey-a: 68, 84, 106;
+
+  --color-purple: #954F72;
+  --color-purple-a: 149, 29, 114;
+
+  --color-black: #000000;
+
+  --color-white: #ffffff;
+  --color-white-a: 255, 255, 255;
+
+  --border-radius: 10rem;
+  
+  --bottom-margin: 1.5rem;
+
+
+  --gradient-primary: linear-gradient(45deg, rgba(25, 161, 219, .6), rgba(62, 105, 53, .6),
+  );
+}
+
+
+
+
 
 
 

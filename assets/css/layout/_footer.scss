@@ -1,0 +1,177 @@
+.footer {
+  background-color: var(--color-grey);
+  color: var(--color-black);
+  padding: 5rem 10vw;
+  text-align: left;
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr 2fr;
+  font-size: 1rem;
+
+  @include respond(medium) {
+    grid-template-columns: auto;
+    place-content: center;
+    text-align: center;
+    font-size: 1.8rem;
+  }
+
+  & a:focus{
+    outline: 1px dashed var(--color-blue);
+    outline-offset: 3px;
+  }
+
+  @include respond(largest) {
+    padding: 8rem 10vw;
+  }
+
+  @include respond(medium) {
+    text-align: center;
+  }
+
+
+  
+
+
+  &__section {
+
+    @include respond(medium) {
+      padding: 2.5rem;
+      border-bottom: 1px solid var(--color-black);
+    }
+
+  }
+
+
+  &__header {
+    text-transform: uppercase;
+    font-size: 1rem;
+    margin-block-end: .5rem;
+
+
+  @include respond(medium) {
+    font-size: 2.2rem;
+  }
+
+    
+  }
+
+  &__email{
+    text-transform: uppercase;
+    margin-block-end: 0.5rem;
+  }
+
+  &__list {
+    column-count: 2;
+    margin-block-end: 1rem;
+
+    @include respond(medlg) {
+      font-size: 2rem;
+    }
+
+    @include respond(medium) {
+      column-count: 1;
+    }
+
+   
+    
+  }
+
+  &__item {
+    list-style: none;
+
+    &:not(:last-child) {
+      margin-bottom: .5rem;
+    }
+  }
+
+  &__link {
+    color: inherit;
+    text-decoration: none;
+    transition: all .3s ease-in-out;
+
+    
+
+    &:hover,
+    &:focus {
+      color: var(--color-blue);
+    }
+
+
+ 
+  }
+
+  &__social {
+    display: flex;
+    margin-top: 0.8rem;
+
+    @include respond(medium) {
+      place-content: center;
+    }
+
+  }
+
+  &__social-link:not(:last-child) {
+    margin-right: 1.5rem;
+  }
+
+  &__social-link:focus {
+    outline: 2px dashed var(--color-blue);
+    outline-offset: 1rem;
+
+    & .footer__icon{
+      fill: var(--color-blue);
+    }
+  }
+
+  &__social-link:hover .footer__icon{
+
+      fill: var(--color-blue);
+  
+  }
+
+  
+
+ 
+
+  &__icon {
+    fill: var(--color-black);
+    height: 1.8rem;
+    width: 1.8rem;
+    transition: all .3s ease-in-out;
+
+   
+
+    @include respond(medium) {
+      height: 2.5rem;
+      width: 2.5rem;
+    }
+
+
+  }
+
+
+
+  &__mobile {
+    display: none;
+
+    @include respond(medium) {
+      //display: flex;
+       // Remove until we have social media links
+    display: none;
+      place-content: center;
+      padding: 2.5rem;
+      border-bottom: 2px solid var(--color-blue);
+    }
+  }
+
+ 
+
+  &__award-info{
+
+  }
+}
+    
+
+   
+
