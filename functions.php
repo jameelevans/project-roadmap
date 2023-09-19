@@ -5,29 +5,44 @@
  * ! What the custom functions do:
  * *    1. Enqueues all styles and scripts
  * *    2. Asynchronously load scripts for speed optimization
- *      
+ * *    3. Activates the ability to add custom logo in customizer    
+ * *    4. Enable support for custom sized Post Thumbnails on posts and pages
+ * *    5. Add site link to logo on login screen
+ * *    6. Make css styles available to login screen
+ * *    7. Replace WP logo with site title name on login screen
+ * *    8. Add theme title to login screen
+ * *    9.  Display inline svg icon from sprite sheet with custom class
+ * *    10. Display Home BG image
+ * *    11. Display site navigation
+ * *    12. Display mobile navigation
+ * *    13.  Enable custom post types
+ * *    14. Change dashboard Posts to Resources
  */
 
 // * * --------| Actions and filters in order |-------- *
 
   // Action to enque styles and scripts
   add_action( 'wp_enqueue_scripts', 'theme_enqueue_scripts' );
+  add_action( 'after_setup_theme', 'prm_custom_logo_setup' );
+  add_action('init', 'custom_post_types');
+  add_action('login_enqueue_scripts', 'projectroadmap_login_css');
+  add_action( 'init', 'cp_change_post_object' );
 
   // Asynchronously load scripts
   add_filter( 'clean_url', 'async_scripts', 11, 1 ); 
-
-
-
+  add_filter('login_headerurl', 'ourHeaderUrl');
+  add_filter('login_headertitle', 'projectroadmap_login_title');
+  
 
 // * * --------| Functions in order |-------- *
 
-  //Enqueuing styles and scripts
+  //* 1. Enqueuing styles and scripts
   function theme_enqueue_scripts() {
   wp_enqueue_script( 'Bundled_js', get_template_directory_uri() . '/assets/js/scripts-bundled.js#asyncload', array(), '1.0.0', true );
   wp_enqueue_style('projectroadmap_main_styles', get_stylesheet_uri());
   }
 
-  // Asynchronously load scripts
+  //* 2. Asynchronously load scripts
   function async_scripts($url){
   if ( strpos( $url, '#asyncload') === false )
     return $url;
@@ -36,7 +51,6 @@
   else
     return str_replace( '#asyncload', '', $url )."' async='async";
   }
-
 
    //* 3. Activates the ability to add custom logo in customizer
 function prm_custom_logo_setup() {
@@ -63,47 +77,38 @@ function prm_custom_logo_setup() {
     add_image_size( 'staff-headshot', 350, 350, true);
     add_image_size('pageBanner', 1300, 700, true);
   }
-  add_action( 'after_setup_theme', 'prm_custom_logo_setup' );
   add_theme_support( 'post-thumbnails' );
   // .Activate the ability to add custom logo in customizer
   // .Enable support for Post Thumbnails on posts and pages
 
-//* 5. Add site link to logo on login screen
-function ourHeaderUrl() {
-  return esc_url(site_url('/'));
-}
-add_filter('login_headerurl', 'ourHeaderUrl');
-// .Add site link to logo on login screen
-
-
-
-
-
-//* 4. Make css styles available to login screen
-function projectroadmap_login_css() {
-  wp_enqueue_style('projectroadmap_main_styles', get_stylesheet_uri());
+  //* 5. Add site link to logo on login screen
+  function ourHeaderUrl() {
+    return esc_url(site_url('/'));
   }
-add_action('login_enqueue_scripts', 'projectroadmap_login_css');
-// .Make css styles available to login screen
 
-//* 5. Replace WP logo with site title name on login screen
-function projectroadmap_login_title() {
-  return get_bloginfo('name');
-}
-add_filter('login_headertitle', 'projectroadmap_login_title');
-// .Replace WP logo with site title name on login screen
+  // .Add site link to logo on login screen
 
+  //* 6. Make css styles available to login screen
+  function projectroadmap_login_css() {
+    wp_enqueue_style('projectroadmap_main_styles', get_stylesheet_uri());
+    }
+  // .Make css styles available to login screen
 
-//* 7. Add theme title to login screen
-function ourLoginTitle() {
-  return get_bloginfo('name');
-}
-add_filter('login_headertitle', 'ourLoginTitle');
-// .Add theme title to login screen
+  //* 7. Replace WP logo with site title name on login screen
+  function projectroadmap_login_title() {
+    return get_bloginfo('name');
+  }
+  // .Replace WP logo with site title name on login screen
 
+  //* 8. Add theme title to login screen
+  function ourLoginTitle() {
+    return get_bloginfo('name');
+  }
+  add_filter('login_headertitle', 'ourLoginTitle');
+  // .Add theme title to login screen
 
-  //* 7.  Display inline svg icon from sprite sheet with custom class
-function svg_icon($class, $icon) { ?>
+  //* 9.  Display inline svg icon from sprite sheet with custom class
+  function svg_icon($class, $icon) { ?>
   <svg class="<?php echo $class ?>" aria-hidden="true">
     <use
       xlink:href="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/img/sprite.svg' ); ?>#icon-<?php echo $icon ?>">
@@ -112,9 +117,7 @@ function svg_icon($class, $icon) { ?>
   <?php } 
   // .Display inline svg icon from sprite sheet with custom class
 
-
-
-  //* 8. Display Home BG Video
+  //* 10. Display Home BG image
   function bg_video() { ?>
     <div class="bg-video">
       <picture class="bg-video__content">
@@ -122,11 +125,10 @@ function svg_icon($class, $icon) { ?>
       </picture>
     </div>
     <?php }
-    //. Display Home bg video
+    //. Display Home bg image
 
-
-   //* 10. Display site navigation
-function site_navigation() { ?>
+   //* 11. Display site navigation
+  function site_navigation() { ?>
   <!-- navigation -->
   <div class="navigation">
         <nav class="navigation__nav" aria-controls="primary-navigation">
@@ -149,8 +151,8 @@ function site_navigation() { ?>
   <?php }
   // .Display site navigation
 
-   //* 11. Display mobile navigation
-function mobile_navigation() { ?>
+   //* 12. Display mobile navigation
+  function mobile_navigation() { ?>
   <!-- Mobile navigation -->
   <div class="mobile-navigation">
     <!-- Hidden menu label for accessibility-->
@@ -159,10 +161,6 @@ function mobile_navigation() { ?>
       <!-- navigation menu icon-->
       <i class="mobile-navigation__icon" alt="Menu icon" aria-hidden="true">&nbsp;</i>
     </button>
-
-
-
-      
       <nav class="mobile-navigation__nav" aria-label="Mobile menu" aria-labelledby="mobile-menu" aria-hidden="true">
         <ul class="mobile-navigation__list">
           <li class="mobile-navigation__item">
@@ -183,9 +181,8 @@ function mobile_navigation() { ?>
   <?php }
   // .Display mobile site navigation
 
-   //* 8.  Enable custom post types
-function custom_post_types() {
-
+   //* 13.  Enable custom post types
+  function custom_post_types() {
   // Staff Post Type
   register_post_type('staff', array(
     'show_in_rest' => true,
@@ -202,13 +199,11 @@ function custom_post_types() {
     ),
     'menu_icon' => 'dashicons-admin-users'
   ));
-  
   }
-   
-    add_action('init', 'custom_post_types');
-    // . 8 Enable custom post types
+    
+//  .Enable custom post types
 
-    // Change dashboard Posts to Resources
+//* 14. Change dashboard Posts to Resources
 function cp_change_post_object() {
   $get_post_type = get_post_type_object('post');
   $labels = $get_post_type->labels;
@@ -226,4 +221,3 @@ function cp_change_post_object() {
       $labels->menu_name = 'Resources';
       $labels->name_admin_bar = 'Resources';
 }
-add_action( 'init', 'cp_change_post_object' );

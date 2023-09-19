@@ -1,11 +1,11 @@
-.error{
+/* Styles for the error page */
+.error {
   max-width: 130rem;
   margin: 0 auto;
   padding: 10rem;
 
-
-
-  &__image{
+  /* Error image */
+  &__image {
     padding: 5rem;
     width: 50%;
     margin-bottom: 4rem;
@@ -13,29 +13,31 @@
     display: block;
   }
 
-  &__header{
+  /* Error header */
+  &__header {
     font-size: 5rem;
     text-align: center;
     margin-block-end: 2rem;
-
   }
 
-  &__p{
+  /* Error message paragraph */
+  &__p {
     font-size: 2.5rem;
     line-height: 1;
     margin-bottom: 4rem;
     text-align: center;
   }
 
-
-  &__home, &__home:link, &__home:visited {
-
-background-color: var(--color-blue);
+  /* Home link button */
+  &__home,
+  &__home:link,
+  &__home:visited {
+    background-color: var(--color-blue);
     font-size: 1.5rem;
     font-weight: 100;
     color: var(--color-white);
     cursor: pointer;
-width: 16rem;
+    width: 16rem;
     border-radius: 2px;
     transition: all .3s ease-in-out;
     padding: 1rem 3rem;
@@ -45,5 +47,5 @@ width: 16rem;
     display: block;
     text-align: center;
     margin: 0 auto;
-}
+  }
 }

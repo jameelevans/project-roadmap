@@ -1,10 +1,9 @@
 @charset "UTF-8";
 /*
 Theme Name: Project Roadmap
-Author: Jameel Evans
 Description: This theme was designed by Laura Myers, Eduardo Minaya and Randy Grubba and developed by Jameel Evans.
 Version: 1.0
-Text Domain: projectroadmap.com
+Text Domain: projectroadmaptta.com
  */
 /**
 --------------------------------------------------------------
@@ -13,23 +12,28 @@ Text Domain: projectroadmap.com
 *  TODO: Import scss modules in the correct area as needed
 *
 * * | Abstracts |
-*   Variables  --> All project variables
-*   Mixins --> All project mixins
-*   Functions --> All project functions
+*     Variables  --> All project variables
+*     Mixins --> All project mixins
+*     Functions --> All project functions
 *
 * * | Base |
-*   Typography   --> All things typography in one place
-*   Base --> Basic project definition
-*   Animations --> All project animations
-*   Utilities --> All utility helper classes
+*     Typography   --> All things typography in one place
+*     Base --> Basic project definition
+*     Animations --> All project animations
+*     Utilities --> All utility helper classes
 *
 * * | Components |
-*
+*     Back Top --> Back Top button
 *
 * * | Layout |
-*
+*     Header
+*     Navigation
+*     Footer
 *
 * * | Pages |
+*     Login
+*     Front page
+*     404 Page
 
 
 --------------------------------------------------------------*/
@@ -343,6 +347,7 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
   overflow: hidden;
 }
 
+/* Styles for the back-to-top button */
 .backtop {
   background-color: rgba(var(--color-dark-blue-a), 0.95);
   padding: 2rem 2.7rem;
@@ -360,6 +365,10 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
   transition: -webkit-transform .3s ease-in-out;
   transition: transform .3s ease-in-out;
   transition: transform .3s ease-in-out, -webkit-transform .3s ease-in-out;
+  /* Focus styles for button */
+  /* Hover styles for button */
+  /* Visible state for button */
+  /* Icon styles for button */
 }
 
 .backtop:focus {
@@ -395,6 +404,7 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
   transition: all .2s ease-in;
 }
 
+/* Styles for the header section */
 .header {
   position: relative;
   width: 100%;
@@ -402,12 +412,24 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
   color: var(--color-white);
   background-position: center;
   background-size: cover;
+  /* Top header section */
+  /* Header logo */
+  /* Header icon */
+  /* Header content section */
+  /* Header main heading */
+  /* Header description */
+  /* Header Lists */
+  /* Header list items */
+  /* Header list check mark */
+  /* Header CTA wrapper */
+  /* Header CTA */
+  /* Header CTA arrow */
 }
 
 .header::before {
   content: '';
-  background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.5)), color-stop(50%, rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 0.5)));
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.5) 100%);
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.50186)), color-stop(25%, rgba(0, 0, 0, 0)), color-stop(75%, rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 0.5)));
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.50186) 0%, rgba(0, 0, 0, 0) 25%, rgba(0, 0, 0, 0) 75%, rgba(0, 0, 0, 0.5) 100%);
   position: absolute;
   top: 0;
   left: 0;
@@ -418,6 +440,7 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
 @media only screen and (max-width: 50em) {
   .header::before {
     display: none;
+    /* Hide before pseudo-element on medium screens */
   }
 }
 
@@ -433,6 +456,7 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
 @media only screen and (max-width: 50em) {
   .header__top {
     display: block;
+    /* Change to block layout on medium screens */
   }
 }
 
@@ -455,6 +479,7 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
 
 @media only screen and (max-width: 50em) {
   .header__top--scrolled {
+    /* Restore default styles for medium screens */
     position: relative;
     width: auto;
     padding: 0;
@@ -471,6 +496,7 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
   .header__top--scrolled .header__icon {
     -webkit-transform: none;
             transform: none;
+    /* Remove icon transform on medium screens */
   }
 }
 
@@ -484,7 +510,6 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
 
 @media only screen and (max-width: 50em) {
   .header__logo {
-    /* Center child horizontally*/
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -492,6 +517,7 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
         -ms-flex-pack: center;
             justify-content: center;
     margin: 5rem 0;
+    /* Center child horizontally on medium screens */
   }
 }
 
@@ -503,6 +529,7 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
   .header__icon {
     z-index: 9999;
     width: 30rem;
+    /* Adjust icon size for medium screens */
   }
 }
 
@@ -516,6 +543,7 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
 @media only screen and (max-width: 62.5em) {
   .header__content {
     width: 55%;
+    /* Adjust content width for large screens */
   }
 }
 
@@ -524,6 +552,7 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
     width: 100%;
     padding: 0 0 5rem;
     text-align: center;
+    /* Center-align text on medium screens */
   }
 }
 
@@ -537,6 +566,7 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
 @media only screen and (max-width: 62.5em) {
   .header__heading {
     font-size: 4rem;
+    /* Adjust font size for large screens */
   }
 }
 
@@ -548,6 +578,7 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
 @media only screen and (max-width: 50em) {
   .header__description {
     font-size: 2.9rem;
+    /* Adjust font size for medium screens */
   }
 }
 
@@ -560,6 +591,7 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
 @media only screen and (max-width: 50em) {
   .header__list {
     font-size: 2.9rem;
+    /* Adjust font size for medium screens */
   }
 }
 
@@ -598,12 +630,14 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
 @media only screen and (max-width: 62.5em) {
   .header__cta {
     font-size: 2.5rem;
+    /* Adjust font size for large screens */
   }
 }
 
 .header__cta:hover ~ .header__arrow {
   -webkit-transform: translate(5px, 18%);
           transform: translate(5px, 18%);
+  /* Move arrow on hover */
 }
 
 .header__arrow {
@@ -620,7 +654,13 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
 @media only screen and (max-width: 37.5em) {
   .header__arrow {
     display: none;
+    /* Hide arrow on small screens */
   }
+}
+
+/* Styles for the home header */
+.home-header {
+  /* Header gradient overlay */
 }
 
 .home-header::after {
@@ -638,16 +678,20 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
 @media only screen and (max-width: 50em) {
   .home-header::after {
     display: none;
+    /* Hide overlay on medium screens */
     visibility: hidden;
   }
 }
 
+/* Styles for the general header */
 @media only screen and (max-width: 50em) {
   .general-header {
     background-image: linear-gradient(256deg, rgba(var(--color-green-a), 0.85) -0.04%, rgba(var(--color-dark-blue-a), 0.75) 51.45%), url("assets/img/resources-header.jpg");
+    /* Change background image for medium screens */
   }
 }
 
+/* Background video positioning */
 .bg-video {
   position: absolute;
   top: 0;
@@ -661,6 +705,7 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
 @media only screen and (max-width: 50em) {
   .bg-video {
     display: none;
+    /* Hide background video on medium screens */
   }
 }
 
@@ -669,17 +714,23 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
   width: 100%;
   -o-object-fit: cover;
      object-fit: cover;
+  /* Make video fill entire parent while maintaining aspect ratio */
 }
 
+/* Styles for the navigation */
 .navigation {
   color: var(--color-white);
   z-index: 9999;
   position: relative;
+  /* Navigation list */
+  /* Navigation item */
+  /* Navigation link */
 }
 
 @media only screen and (max-width: 50em) {
   .navigation {
     display: none;
+    /* Hide navigation on medium screens */
   }
 }
 
@@ -694,11 +745,13 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
 @media only screen and (max-width: 62.5em) {
   .navigation__list {
     gap: 3rem;
+    /* Adjust gap for large screens */
   }
 }
 
 .navigation__item {
   position: relative;
+  /* Current link styling */
 }
 
 .navigation__item .is-current-link {
@@ -740,14 +793,33 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
   color: var(--color-white);
 }
 
+/* Styles for the mobile navigation */
 .mobile-navigation {
   display: none;
+  /* Hide mobile navigation by default */
   position: relative;
+  /* Mobile menu button */
+  /* Mobile menu icon */
+  /* Mobile menu checkbox */
+  /* Mobile menu button */
+  /* Mobile menu background */
+  /* Mobile navigation wrapper - Initially hidden */
+  /* Current page indicator */
+  /* Mobile list */
+  /* Mobile list items */
+  /* Mobile links */
+  /* Social links */
+  /* Social icons */
+  /* Checkbox functionality - Background scaling */
+  /* Checkbox functionality - Show/hide mobile nav */
+  /* Checkbox functionality - Rotate top icon line on menu click */
+  /* Checkbox functionality - Rotate bottom icon line on menu click */
 }
 
 @media only screen and (max-width: 50em) {
   .mobile-navigation {
     display: block;
+    /* Display mobile navigation on medium screens */
     text-align: center;
     margin-top: 4rem;
   }
@@ -777,6 +849,16 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
 .mobile-navigation__icon {
   position: absolute;
   top: 0;
+  /* Base styles for all three icon lines */
+  /* Content must be set empty for pseudo-elements */
+  /* Individual positioning for 1st and 3rd icon lines */
+  /* Close icon styles */
+}
+
+@media only screen and (max-width: 50em) {
+  .mobile-navigation__icon {
+    /* Hide icon on medium screens */
+  }
 }
 
 .mobile-navigation__icon::before, .mobile-navigation__icon::after {
@@ -915,6 +997,7 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
 }
 
 .mobile-navigation__link:hover, .mobile-navigation__link:active {
+  /* Gradient slides in on hover */
   background-position: 100%;
   font-weight: 500;
   color: var(--color-black);
@@ -952,10 +1035,6 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
   visibility: visible;
 }
 
-.mobile-navigation__checkbox:checked + .mobile-navigation__button .mobile-navigation__icon {
-  background-color: transparent;
-}
-
 .mobile-navigation__checkbox:checked + .mobile-navigation__button .mobile-navigation__icon::before {
   top: 3rem;
   -webkit-transform: rotate(135deg);
@@ -968,6 +1047,7 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
           transform: rotate(-135deg);
 }
 
+/* Styles for the footer */
 .footer {
   background-color: var(--color-grey);
   color: var(--color-black);
@@ -978,6 +1058,19 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
   display: grid;
   grid-template-columns: 1fr 1fr 2fr;
   font-size: 1rem;
+  /* Focus styles for links */
+  /* Footer sections */
+  /* Footer header */
+  /* Footer email */
+  /* Footer lists */
+  /* Footer list items */
+  /* Footer links */
+  /* Footer social icons */
+  /* Footer social links */
+  /* Focus styles for social links */
+  /* Hover styles for social links */
+  /* Footer icons */
+  /* Mobile footer section */
 }
 
 @media only screen and (max-width: 50em) {
@@ -1119,14 +1212,19 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
 @media only screen and (max-width: 50em) {
   .footer__mobile {
     display: none;
+    /* Remove until we have social media links */
     place-content: center;
     padding: 2.5rem;
     border-bottom: 2px solid var(--color-blue);
   }
 }
 
+.footer__award-info {
+  /* Additional styles for award information, if any */
+}
+
 .login {
-  background: var(--color-blue);
+  background: var(--color-dark-blue);
   position: relative;
 }
 
@@ -1142,12 +1240,11 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
 
 .login h1 a {
   color: var(--color-white);
-  background-image: url("assets/img/ovc-htc-logo.png");
+  background-image: url("assets/img/PR-LOGO.png");
   background-size: 30rem;
-  height: 5rem;
+  height: 12rem;
   width: auto;
   padding-bottom: 2rem;
-  margin: 0 auto 5rem;
 }
 
 .login form {
@@ -1293,8 +1390,10 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
 }
 
 .about {
+  /* Padding for top, right, bottom, and left sides */
   padding: 8rem 8vw 25rem 8vw;
   margin-inline: auto;
+  /* Responsive styling for medium screens */
 }
 
 @media only screen and (max-width: 50em) {
@@ -1304,6 +1403,7 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
 }
 
 .about__header {
+  /* Header background color and styling */
   background-color: var(--color-green);
   border-radius: 4rem;
   color: var(--color-white);
@@ -1311,6 +1411,7 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
   margin: 0 auto 8rem;
   text-align: left;
   max-width: 130rem;
+  /* Responsive styling for medium screens */
 }
 
 @media only screen and (max-width: 50em) {
@@ -1322,14 +1423,20 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
 }
 
 .about__header p {
+  /* Margin for paragraphs */
   -webkit-margin-after: var(--bottom-margin);
           margin-block-end: var(--bottom-margin);
+  /* Responsive styling for medium screens */
 }
 
 @media only screen and (max-width: 50em) {
   .about__header p {
     text-align: center;
   }
+}
+
+.about .h2__heading {
+  /* Styling for h2 headings on medium screens */
 }
 
 @media only screen and (max-width: 50em) {
@@ -1339,11 +1446,14 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
 }
 
 .about__wrapper {
+  /* Grid layout for the wrapper */
   display: grid;
   grid-template-columns: auto;
   gap: 8rem;
   max-width: 130rem;
   margin: auto;
+  /* Responsive styling for medium screens */
+  /* Responsive styling for largest screens */
 }
 
 @media only screen and (max-width: 50em) {
@@ -1360,9 +1470,14 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
 }
 
 .about__item {
+  /* Grid layout for items */
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 8rem;
+  /* Responsive styling for medium screens */
+  /* Styling for odd items */
+  /* Styling for even items */
+  /* Direction for even items */
 }
 
 @media only screen and (max-width: 50em) {
@@ -1374,6 +1489,7 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
 .about__item:nth-of-type(odd) .about__details {
   border-left: 3px solid var(--color-blue);
   padding-left: 5rem;
+  /* Responsive styling for medium screens */
 }
 
 @media only screen and (max-width: 50em) {
@@ -1387,6 +1503,7 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
   border-right: 3px solid var(--color-blue);
   padding-right: 5rem;
   text-align: right;
+  /* Responsive styling for medium screens */
 }
 
 @media only screen and (max-width: 50em) {
@@ -1398,6 +1515,7 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
 
 .about__item:nth-of-type(even) {
   direction: rtl;
+  /* Responsive styling for medium screens */
 }
 
 @media only screen and (max-width: 50em) {
@@ -1407,9 +1525,11 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
 }
 
 .about__item img {
+  /* Image styling */
   width: 100%;
   display: block;
   border-radius: 1.5rem;
+  /* Responsive styling for medium screens */
 }
 
 @media only screen and (max-width: 50em) {
@@ -1419,6 +1539,7 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
 }
 
 .about__details {
+  /* Details styling */
   height: 80%;
   margin: auto;
   height: -webkit-fit-content;
@@ -1427,7 +1548,9 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
 }
 
 .about__p {
+  /* Paragraph styling */
   line-height: 1.6;
+  /* Responsive styling for medium screens */
 }
 
 @media only screen and (max-width: 50em) {
@@ -1437,6 +1560,7 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
 }
 
 .about__gradient {
+  /* Gradient styling */
   position: relative;
   display: inline-block;
   height: -webkit-fit-content;
@@ -1445,6 +1569,7 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
 }
 
 .about__gradient:after {
+  /* Gradient background */
   content: '';
   position: absolute;
   border-radius: 1.5rem;
@@ -1454,6 +1579,7 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
   height: 100%;
   display: inline-block;
   background: linear-gradient(45deg, rgba(25, 161, 219, 0.6), rgba(62, 105, 53, 0.6));
+  /* Responsive styling for medium screens */
 }
 
 @media only screen and (max-width: 50em) {
@@ -1463,6 +1589,7 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
 }
 
 .staff {
+  /* Staff section styling */
   padding: 8rem 8vw;
   text-align: center;
   min-height: 100%;
@@ -1471,11 +1598,14 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
   background-size: cover;
   background-attachment: fixed;
   background-position: bottom;
+  /* Responsive styling for medium screens */
 }
 
 .staff__wrapper {
+  /* Wrapper transformation */
   -webkit-transform: translateY(-25rem);
           transform: translateY(-25rem);
+  /* Responsive styling for medium screens */
 }
 
 @media only screen and (max-width: 50em) {
@@ -1486,10 +1616,12 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
 }
 
 .staff__wrapper .h3__heading {
+  /* Styling for h3 headings */
   font-weight: 500;
 }
 
 .staff__header {
+  /* Header background color and styling */
   background-color: var(--color-blue);
   border-radius: 4rem;
   color: var(--color-white);
@@ -1497,6 +1629,7 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
   margin: 0 auto 5rem;
   text-align: center;
   max-width: 130rem;
+  /* Responsive styling for medium screens */
 }
 
 @media only screen and (max-width: 50em) {
@@ -1507,8 +1640,10 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
 }
 
 .staff__header p {
+  /* Margin for paragraphs */
   -webkit-margin-after: var(--bottom-margin);
           margin-block-end: var(--bottom-margin);
+  /* Responsive styling for medium screens */
 }
 
 @media only screen and (max-width: 50em) {
@@ -1524,6 +1659,7 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
 }
 
 .staff__content {
+  /* Content styling */
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1538,6 +1674,7 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
 }
 
 .staff__member {
+  /* Member styling */
   position: relative;
   width: 19rem;
   margin: 3.5rem;
@@ -1547,12 +1684,14 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
 }
 
 .staff__member:focus {
+  /* Focus styling */
   outline: 4px dashed var(--color-teal);
   outline-offset: 5rem;
   border-radius: 5rem;
 }
 
 .staff__member .staff__overlay {
+  /* Grey overlay styling */
   content: '';
   position: absolute;
   top: 0;
@@ -1565,6 +1704,7 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
   transition: all .5s ease;
   background-color: var(--color-blue);
   border-radius: 8px;
+  /* Responsive styling for medium screens */
 }
 
 @media only screen and (max-width: 50em) {
@@ -1590,25 +1730,30 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
 }
 
 .staff__is-mobile .staff__details {
+  /* Styling for staff details on mobile */
   color: var(--color-black);
   opacity: 1;
   margin-top: 2.5rem;
 }
 
 .staff__is-mobile .staff__name {
+  /* Styling for staff name on mobile */
   font-size: 1.8rem;
   opacity: 1;
 }
 
 .staff__is-mobile .staff__title {
+  /* Styling for staff title on mobile */
   display: none;
 }
 
 .staff__is-mobile .staff__overlay {
+  /* Styling for staff overlay on mobile */
   display: none;
 }
 
 .staff__is-desktop .staff__details {
+  /* Styling for staff details on desktop */
   color: var(--color-white);
   position: absolute;
   top: 0;
@@ -1621,6 +1766,7 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
   display: grid;
   place-content: center;
   opacity: 0;
+  /* Responsive styling for medium screens */
 }
 
 @media only screen and (max-width: 50em) {
@@ -1635,10 +1781,12 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
 }
 
 .staff__is-desktop .staff__name {
+  /* Styling for staff name on desktop */
   font-size: 1.8rem;
 }
 
 .staff__headshot {
+  /* Headshot image styling */
   width: 19rem;
   position: relative;
   z-index: 2;
@@ -1648,10 +1796,12 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
 }
 
 .staff__details {
+  /* Styling for staff details */
   z-index: 10;
   width: 18.5rem;
   -webkit-transition: all .5s ease;
   transition: all .5s ease;
+  /* Responsive styling for medium screens */
 }
 
 @media only screen and (max-width: 50em) {
@@ -1665,11 +1815,13 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
 }
 
 .staff__name {
+  /* Styling for staff name */
   font-weight: 600;
   line-height: 1.2;
   -ms-flex-item-align: center;
       align-self: center;
   z-index: 99;
+  /* Responsive styling for medium screens */
 }
 
 @media only screen and (max-width: 50em) {
@@ -1679,7 +1831,9 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
 }
 
 .staff__title {
+  /* Styling for staff title */
   font-size: 1.3rem;
+  /* Responsive styling for medium screens */
 }
 
 @media only screen and (max-width: 50em) {
@@ -1689,17 +1843,19 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
 }
 
 .resources {
+  /* Resources section styling */
   background-color: var(--color-green);
   text-align: center;
   padding: 8rem 8vw;
 }
 
 .resources .h2__heading {
-  font-weight: 400;
+  /* Styling for h2 headings */
   color: var(--color-white);
 }
 
 .resources__wrapper {
+  /* Wrapper for resources */
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1715,6 +1871,7 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
 }
 
 .resource {
+  /* Single resource item styling */
   background-color: var(--color-grey);
   padding: 5rem 2rem;
   border-radius: 1.5rem;
@@ -1725,11 +1882,13 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
 
 .resource:focus .resource__download,
 .resource:hover .resource__download {
+  /* Styling for download button on focus and hover */
   background-color: var(--color-blue);
 }
 
 .resource:focus .resource__icon,
 .resource:hover .resource__icon {
+  /* Styling for resource icon on focus and hover */
   fill: var(--color-white);
   -webkit-transform: translateY(5px) scale(0.93);
           transform: translateY(5px) scale(0.93);
@@ -1737,10 +1896,12 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
 
 .resource:focus .resource__name,
 .resource:hover .resource__name {
+  /* Styling for resource name on focus and hover */
   color: var(--color-blue);
 }
 
 .resource__download {
+  /* Download button styling */
   display: grid;
   -webkit-box-align: center;
       -ms-flex-align: center;
@@ -1756,12 +1917,13 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
 }
 
 .resource__icon {
+  /* Icon styling */
   margin: 0 auto;
   fill: var(--color-blue);
   width: 6.5rem;
   height: 6.5rem;
-  -webkit-transition: all .5s ease;
-  transition: all .5s ease;
+  -webkit-transition: all;
+  transition: all;
 }
 
 .resource .h4__header {
@@ -1779,6 +1941,7 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
   transition: all .5s ease;
 }
 
+/* Styles for the .questions section */
 .questions {
   background-color: var(--color-white);
   border-radius: 4rem;
@@ -1813,10 +1976,15 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
   outline-offset: 2px;
 }
 
+/* Styles for the error page */
 .error {
   max-width: 130rem;
   margin: 0 auto;
   padding: 10rem;
+  /* Error image */
+  /* Error header */
+  /* Error message paragraph */
+  /* Home link button */
 }
 
 .error__image {

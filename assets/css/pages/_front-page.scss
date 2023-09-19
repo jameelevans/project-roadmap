@@ -1,13 +1,15 @@
 .about {
+  /* Padding for top, right, bottom, and left sides */
   padding: 8rem 8vw 25rem 8vw;
-
   margin-inline: auto;
 
+  /* Responsive styling for medium screens */
   @include respond(medium) {
     padding: 0 0 5rem 0;
   }
 
   &__header {
+    /* Header background color and styling */
     background-color: var(--color-green);
     border-radius: 4rem;
     color: var(--color-white);
@@ -16,7 +18,7 @@
     text-align: left;
     max-width: 130rem;
 
-
+    /* Responsive styling for medium screens */
     @include respond(medium) {
       border-radius: 0;
       margin-bottom: 0;
@@ -24,8 +26,10 @@
     }
 
     p {
+      /* Margin for paragraphs */
       margin-block-end: var(--bottom-margin);
 
+      /* Responsive styling for medium screens */
       @include respond(medium) {
         text-align: center;
       }
@@ -34,25 +38,26 @@
 
   & .h2__heading {
 
+    /* Styling for h2 headings on medium screens */
     @include respond(medium) {
       text-align: center;
     }
   }
 
-
   &__wrapper {
+    /* Grid layout for the wrapper */
     display: grid;
     grid-template-columns: auto;
     gap: 8rem;
     max-width: 130rem;
     margin: auto;
 
-
+    /* Responsive styling for medium screens */
     @include respond(medium) {
       padding: 0;
     }
 
-
+    /* Responsive styling for largest screens */
     @include respond(largest) {
       grid-template-rows: auto;
       grid-template-columns: none;
@@ -60,80 +65,89 @@
   }
 
   &__item {
+    /* Grid layout for items */
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 8rem;
 
+    /* Responsive styling for medium screens */
     @include respond(medium) {
       grid-template-columns: auto;
     }
 
+    /* Styling for odd items */
     &:nth-of-type(odd) .about__details {
       border-left: 3px solid var(--color-blue);
       padding-left: 5rem;
 
-
+      /* Responsive styling for medium screens */
       @include respond(medium) {
         border: none;
         padding-right: 5rem;
       }
     }
 
+    /* Styling for even items */
     &:nth-of-type(even) .about__details {
       border-right: 3px solid var(--color-blue);
       padding-right: 5rem;
       text-align: right;
 
+      /* Responsive styling for medium screens */
       @include respond(medium) {
         border: none;
         padding-left: 5rem;
       }
     }
 
+    /* Direction for even items */
     &:nth-of-type(even) {
       direction: rtl;
 
+      /* Responsive styling for medium screens */
       @include respond(medium) {
         direction: ltr;
       }
     }
 
-
-
     img {
+      /* Image styling */
       width: 100%;
       display: block;
       border-radius: 1.5rem;
 
+      /* Responsive styling for medium screens */
       @include respond(medium) {
         border-radius: 0;
       }
-
-
     }
-
   }
 
   &__details {
+    /* Details styling */
     height: 80%;
     margin: auto;
     height: fit-content;
   }
 
   &__p {
+    /* Paragraph styling */
     line-height: 1.6;
 
+    /* Responsive styling for medium screens */
     @include respond(medium) {
       text-align: center;
     }
   }
 
   &__gradient {
+    /* Gradient styling */
     position: relative;
     display: inline-block;
     height: fit-content;
 
     &:after {
+      /* Gradient background */
       content: '';
       position: absolute;
       border-radius: 1.5rem;
@@ -142,18 +156,18 @@
       width: 100%;
       height: 100%;
       display: inline-block;
-      background: linear-gradient(45deg, rgba(25, 161, 219, .6), rgba(62, 105, 53, .6),
-        );
+      background: linear-gradient(45deg, rgba(25, 161, 219, .6), rgba(62, 105, 53, .6));
 
+      /* Responsive styling for medium screens */
       @include respond(medium) {
         border-radius: 0;
       }
     }
   }
-
 }
 
 .staff {
+  /* Staff section styling */
   padding: 8rem 8vw;
   text-align: center;
   min-height: 100%;
@@ -163,18 +177,22 @@
   background-position: bottom;
 
   &__wrapper {
+    /* Wrapper transformation */
     transform: translateY(-25rem);
 
+    /* Responsive styling for medium screens */
     @include respond(medium) {
       transform: none;
     }
 
     .h3__heading {
+      /* Styling for h3 headings */
       font-weight: 500;
     }
   }
 
   &__header {
+    /* Header background color and styling */
     background-color: var(--color-blue);
     border-radius: 4rem;
     color: var(--color-white);
@@ -183,24 +201,24 @@
     text-align: center;
     max-width: 130rem;
 
-
+    /* Responsive styling for medium screens */
     @include respond(medium) {
       border-radius: 0;
       padding: 5rem;
-
     }
 
     p {
+      /* Margin for paragraphs */
       margin-block-end: var(--bottom-margin);
 
+      /* Responsive styling for medium screens */
       @include respond(medium) {
         text-align: center;
       }
     }
   }
 
-
-
+  /* Responsive styling for medium screens */
   @include respond(medium) {
     padding: 0 0 10rem 0;
   }
@@ -208,6 +226,7 @@
   & .h2__heading {}
 
   &__content {
+    /* Content styling */
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -218,6 +237,7 @@
 
   // Member wrapper and link
   &__member {
+    /* Member styling */
     position: relative;
     width: 19rem;
     margin: 3.5rem;
@@ -225,14 +245,15 @@
     transition: all .5s ease;
 
     &:focus {
+      /* Focus styling */
       outline: 4px dashed var(--color-teal);
       outline-offset: 5rem;
       border-radius: 5rem;
     }
 
-
-    //Grey overlay - initially invisible 
+    // Grey overlay - initially invisible
     .staff__overlay {
+      /* Grey overlay styling */
       content: '';
       position: absolute;
       top: 0;
@@ -245,71 +266,60 @@
       background-color: var(--color-blue);
       border-radius: 8px;
 
+      /* Responsive styling for medium screens */
       @include respond(medium) {
         display: none;
       }
     }
 
-
-
     // Grey staff overlay is visible on hover
     &:focus .staff__overlay,
     &:hover .staff__overlay {
       opacity: .8;
-
     }
 
-    // Reveil staff details on member hover
+    // Reveal staff details on member hover
     &:focus .staff__details,
     &:hover .staff__details {
       opacity: 1;
     }
 
-    // Reveil staff details on member hover
+    // Reveal staff details on member hover
     &:focus .staff__name,
     &:hover .staff__name {
       bottom: -3.5rem;
       opacity: 1;
-
-
     }
-
-
-
-    &:hover .staff__headshot {
-      //filter: blur(2px);
-
-      @include respond(medium) {
-        //filter: blur(0);
-      }
-    }
-
   }
 
   &__is-mobile .staff__details {
+    /* Styling for staff details on mobile */
     color: var(--color-black);
     opacity: 1;
     margin-top: 2.5rem;
   }
 
-
   // Staff name for mobile users
   &__is-mobile .staff__name {
+    /* Styling for staff name on mobile */
     font-size: 1.8rem;
     opacity: 1;
   }
 
   // Staff name for mobile users
   &__is-mobile .staff__title {
+    /* Styling for staff title on mobile */
     display: none;
   }
 
   // Staff overlay for mobile users
   &__is-mobile .staff__overlay {
+    /* Styling for staff overlay on mobile */
     display: none;
   }
 
   &__is-desktop .staff__details {
+    /* Styling for staff details on desktop */
     color: var(--color-white);
     position: absolute;
     //padding: 1rem;
@@ -323,23 +333,24 @@
     place-content: center;
     opacity: 0;
 
+    /* Responsive styling for medium screens */
     @include respond(medium) {
       opacity: 1;
       position: relative;
       margin-block-start: 1rem;
       text-align: center;
       width: 100%;
-
     }
   }
 
   &__is-desktop .staff__name {
+    /* Styling for staff name on desktop */
     font-size: 1.8rem;
   }
 
-
-  // Headshot image 
+  // Headshot image
   &__headshot {
+    /* Headshot image styling */
     width: 19rem;
     position: relative;
     z-index: 2;
@@ -347,32 +358,31 @@
     border-radius: 8px;
   }
 
-
-
   // Staff details wrapper - initially hidden
   &__details {
+    /* Styling for staff details */
     z-index: 10;
     width: 18.5rem;
     transition: all .5s ease;
 
+    /* Responsive styling for medium screens */
     @include respond(medium) {
       opacity: 1;
       position: relative;
       margin-block-start: 2rem;
       width: 100%;
     }
-
-
   }
 
   // Staff details name
   &__name {
+    /* Styling for staff name */
     font-weight: 600;
     line-height: 1.2;
     align-self: center;
     z-index: 99;
 
-
+    /* Responsive styling for medium screens */
     @include respond(medlg) {
       font-size: $font-body-mobile;
       text-align: center;
@@ -386,30 +396,29 @@
 
   // Staff title - Hidden on mobile
   &__title {
+    /* Styling for staff title */
     font-size: 1.3rem;
 
+    /* Responsive styling for medium screens */
     @include respond(medium) {
       display: none;
     }
   }
-
-
-
 }
 
 .resources {
+  /* Resources section styling */
   background-color: var(--color-green);
   text-align: center;
   padding: 8rem 8vw;
 
   .h2__heading {
-    font-weight: 400;
+    /* Styling for h2 headings */
     color: var(--color-white);
   }
 
-
   &__wrapper {
-
+    /* Wrapper for resources */
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -417,21 +426,11 @@
     max-width: 130rem;
     margin: 0 auto 8rem;
     gap: 8rem;
-
-
-
-
   }
-
-
-
-
-
-
-
 }
 
 .resource {
+  /* Single resource item styling */
   background-color: var(--color-grey);
   padding: 5rem 2rem;
   border-radius: 1.5rem;
@@ -439,25 +438,27 @@
   text-decoration: none;
   color: var(--color-black);
 
-
-
   &:focus .resource__download,
   &:hover .resource__download {
+    /* Styling for download button on focus and hover */
     background-color: var(--color-blue);
   }
 
   &:focus .resource__icon,
   &:hover .resource__icon {
+    /* Styling for resource icon on focus and hover */
     fill: var(--color-white);
     transform: translateY(5px) scale(.93);
   }
 
   &:focus .resource__name,
   &:hover .resource__name {
+    /* Styling for resource name on focus and hover */
     color: var(--color-blue);
   }
 
   &__download {
+    /* Download button styling */
     display: grid;
     align-items: center;
     background-color: var(--color-white);
@@ -470,14 +471,12 @@
   }
 
   &__icon {
-
+    /* Icon styling */
     margin: 0 auto;
     fill: var(--color-blue);
     width: 6.5rem;
     height: 6.5rem;
-    transition: all .5s ease;
-
-
+    transition: all
   }
 
   .h4__header {
@@ -493,9 +492,9 @@
     font-size: 1.9rem;
     transition: all .5s ease;
   }
-
 }
 
+/* Styles for the .questions section */
 .questions {
   background-color: var(--color-white);
   border-radius: 4rem;
@@ -510,25 +509,21 @@
 
   p {
     font-size: $font-body;
-
-
-
-
   }
 
-  &__email{
+  &__email {
     color: var(--color-black);
-      font-weight: 600;
-      transition: all .5s ease;
+    font-weight: 600;
+    transition: all .5s ease;
 
-      &:hover,
-      &:focus {
-        color: var(--color-blue);
-      }
+    &:hover,
+    &:focus {
+      color: var(--color-blue);
+    }
 
-      &:focus {
-        outline: 1px dashed var(--color-blue);
-        outline-offset: 2px;
-      }
+    &:focus {
+      outline: 1px dashed var(--color-blue);
+      outline-offset: 2px;
+    }
   }
 }

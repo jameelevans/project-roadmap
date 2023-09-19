@@ -1,3 +1,4 @@
+/* Styles for the header section */
 .header {
   position: relative;
   width: 100%;
@@ -6,9 +7,9 @@
   background-position: center;
   background-size: cover;
 
-  &::before{
+  &::before {
     content: '';
-    background: linear-gradient(180deg, rgba(0,0,0,0.50) 0%, rgba(0,0,0,0) 50%, rgba(0,0,0,0.50) 100%);
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.5018601190476191) 0%, rgba(0, 0, 0, 0) 25%, rgba(0, 0, 0, 0) 75%, rgba(0, 0, 0, 0.5) 100%);
     position: absolute;
     top: 0;
     left: 0;
@@ -17,15 +18,11 @@
 
     @include respond(medium) {
       display: none;
-   
+      /* Hide before pseudo-element on medium screens */
     }
   }
 
-
-
-
-
-  // Top header section
+  /* Top header section */
   &__top {
     display: grid;
     grid-template-columns: min-content auto;
@@ -35,9 +32,10 @@
 
     @include respond(medium) {
       display: block;
+      /* Change to block layout on medium screens */
     }
 
-    &--scrolled{
+    &--scrolled {
       position: fixed;
       top: 0;
       width: 100vw;
@@ -46,30 +44,28 @@
       right: 0;
       z-index: 99;
       background-color: rgba(var(--color-dark-blue-a), 0.95);
-    transition: background-color .3s ease-in-out, transform .3s ease-in-out;
+      transition: background-color .3s ease-in-out, transform .3s ease-in-out;
 
       @include respond(medium) {
-        //display: none;
+        /* Restore default styles for medium screens */
         position: relative;
-        width: auto;      
+        width: auto;
         padding: 0;
         background-color: transparent;
       }
 
-      & .header__icon{
+      & .header__icon {
         transform: scale(0.8) translateY(5px);
 
         @include respond(medium) {
           transform: none;
+          /* Remove icon transform on medium screens */
         }
       }
-
     }
-
-   
   }
 
-  // Header logo
+  /* Header logo */
   &__logo {
     margin: auto 8rem auto 0;
     padding: 0;
@@ -78,24 +74,25 @@
     place-self: center;
 
     @include respond(medium) {
-      /* Center child horizontally*/
       display: flex;
       justify-content: center;
       margin: 5rem 0;
+      /* Center child horizontally on medium screens */
     }
   }
 
-  // Header icon
+  /* Header icon */
   &__icon {
     width: 20rem;
 
-    @include respond(medium){
+    @include respond(medium) {
       z-index: 9999;
-      width: 30rem
+      width: 30rem;
+      /* Adjust icon size for medium screens */
     }
   }
 
-  // Header content section
+  /* Header content section */
   &__content {
     padding: 8vw 0;
     width: 50rem;
@@ -104,41 +101,42 @@
 
     @include respond(large) {
       width: 55%;
+      /* Adjust content width for large screens */
     }
 
     @include respond(medium) {
       width: 100%;
       padding: 0 0 5rem;
       text-align: center;
+      /* Center-align text on medium screens */
     }
   }
 
-  // Header main heading
+  /* Header main heading */
   &__heading {
     font-size: 4.5rem;
     margin-bottom: 2.5rem;
     text-transform: uppercase;
     line-height: 1.1;
-  
-
 
     @include respond(large) {
       font-size: 4rem;
+      /* Adjust font size for large screens */
     }
   }
 
-  // Header description
+  /* Header description */
   &__description {
-
     font-size: 2.5rem;
     margin-bottom: 2.5rem;
 
     @include respond(medium) {
       font-size: 2.9rem;
+      /* Adjust font size for medium screens */
     }
   }
 
-   // Header Lists
+  /* Header Lists */
   &__list {
     font-size: 2.5rem;
     padding-left: 3rem;
@@ -146,37 +144,34 @@
 
     @include respond(medium) {
       font-size: 2.9rem;
+      /* Adjust font size for medium screens */
     }
   }
 
-   // Header list items
+  /* Header list items */
   &__item {
-
     &:not(:last-of-type) {
       margin-block-end: 4rem;
     }
   }
 
-   // Header list check mark
+  /* Header list check mark */
   &__item:before {
     content: '✓';
     margin: 0 1rem 0 -2.8rem;
   }
 
-   // Header CTA wrapper
+  /* Header CTA wrapper */
   &__cta--wrapper {
     display: block;
     font-size: 2.2rem;
-    
 
     &:not(:last-of-type) {
       margin-block-end: 4rem;
     }
-
-  
   }
 
-  // Header CTA
+  /* Header CTA */
   &__cta {
     position: relative;
     text-decoration: none;
@@ -189,19 +184,16 @@
 
     @include respond(large) {
       font-size: 2.5rem;
+      /* Adjust font size for large screens */
     }
 
-
-    &:hover~ .header__arrow {
+    &:hover~.header__arrow {
       transform: translate(5px, 18%);
+      /* Move arrow on hover */
     }
-
-    
-
-    
   }
 
-  // Header CTA arrow
+  /* Header CTA arrow */
   &__arrow {
     fill: var(--color-white);
     height: 2.4rem;
@@ -212,15 +204,15 @@
 
     @include respond(small) {
       display: none;
+      /* Hide arrow on small screens */
     }
   }
-
 }
 
-// Home header
+/* Styles for the home header */
 .home-header {
 
-  // Header gradient overlay
+  /* Header gradient overlay */
   &::after {
     position: absolute;
     mix-blend-mode: screen;
@@ -237,21 +229,22 @@
 
     @include respond(medium) {
       display: none;
+      /* Hide overlay on medium screens */
       visibility: hidden;
     }
   }
 }
 
-// General header
+/* Styles for the general header */
 .general-header {
-
   @include respond(medium) {
     background-image: linear-gradient(256deg, rgba(var(--color-green-a), 0.85) -0.04%, rgba(var(--color-dark-blue-a), 0.75) 51.45%),
       url("assets/img/resources-header.jpg");
+    /* Change background image for medium screens */
   }
 }
 
-// Background video positoning
+/* Background video positioning */
 .bg-video {
   position: absolute;
   top: 0;
@@ -263,13 +256,13 @@
 
   @include respond(medium) {
     display: none;
+    /* Hide background video on medium screens */
   }
 
   &__content {
     height: 100%;
     width: 100%;
-
-    // Makes video fill entire parent while maintaining aspect ratio
     object-fit: cover;
+    /* Make video fill entire parent while maintaining aspect ratio */
   }
 }

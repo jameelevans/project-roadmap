@@ -1,3 +1,4 @@
+/* Styles for the back-to-top button */
 .backtop {
   background-color: rgba(var(--color-dark-blue-a), 0.95);
   padding: 2rem 2.7rem;
@@ -11,29 +12,30 @@
   opacity: 0;
   transform: scale(0);
   transition: transform .3s ease-in-out;
-  
 
-        &:focus{
-          outline: 2px dashed var(--color-white);
-          outline-offset: none;
-        }
+  /* Focus styles for button */
+  &:focus {
+    outline: 2px dashed var(--color-white);
+    outline-offset: none;
+  }
 
   @include respond(medium) {
     bottom: 5rem;
     right: 3rem;
-
   }
 
-
+  /* Hover styles for button */
   &:hover .backtop__icon {
     transform: translate(-43%, -40%);
   }
 
+  /* Visible state for button */
   &--is-visible {
     opacity: 1;
     transform: scale(1);
   }
 
+  /* Icon styles for button */
   &__icon {
     fill: var(--color-white);
     height: 4rem;
