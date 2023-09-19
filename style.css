@@ -1878,6 +1878,8 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
   width: 30rem;
   text-decoration: none;
   color: var(--color-black);
+  -webkit-transition: all .3s ease-in-out;
+  transition: all .3s ease-in-out;
 }
 
 .resource:focus .resource__download,
@@ -1922,8 +1924,8 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
   fill: var(--color-blue);
   width: 6.5rem;
   height: 6.5rem;
-  -webkit-transition: all;
-  transition: all;
+  -webkit-transition: all .3s ease-in-out;
+  transition: all .3s ease-in-out;
 }
 
 .resource .h4__header {

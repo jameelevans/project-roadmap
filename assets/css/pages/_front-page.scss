@@ -437,6 +437,8 @@
   width: 30rem;
   text-decoration: none;
   color: var(--color-black);
+  transition: all .3s ease-in-out;
+  
 
   &:focus .resource__download,
   &:hover .resource__download {
@@ -476,7 +478,7 @@
     fill: var(--color-blue);
     width: 6.5rem;
     height: 6.5rem;
-    transition: all
+    transition: all .3s ease-in-out;
   }
 
   .h4__header {
