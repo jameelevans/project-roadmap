@@ -12,7 +12,7 @@ get_header();
         <section class="about page-section" id="about" data-matching-link="#about-link">
 					<div class="about__header">
 						<h2 class="h2__heading">About</h2>
-						<p class="body-text">Project Roadmap delivers Training and Technical Assistance(TTA) exclusively to <b>OVC Enhanced Collaborative Model (ECM) grantees and their partners</b>, designed to meet the needs of individual grantees and ECM task forces as multi-disciplinary teams.</p>
+						<p class="body-text">Project Roadmap delivers Training and Technical Assistance (TTA) exclusively to <b>OVC Enhanced Collaborative Model (ECM) grantees and their partners</b>, designed to meet the needs of individual grantees and ECM task forces as multi-disciplinary teams.</p>
 						<h3 class="h3__heading">Our Strategy</h3>
 						<p class="body-text">We take a dynamic, three-level approach to support the needs of ECM task forces.</p>
 					</div>
@@ -23,7 +23,7 @@ get_header();
 							</div>
 							<div class="about__details">
 								<h3 class="h3__heading">Task Force</h3>
-								<p class="about__p body-text">Each ECM Task Force is offered individual mentoring through Task Force Liaisons (TFLs.) This technical assistance (TA) includes support in key areas such as: structure, investigations, data-driven approaches, and training/awareness.</p>
+								<p class="about__p body-text">Each ECM Task Force is offered individual mentoring through Task Force Liaisons (TFLs). This technical assistance (TA) includes support in key areas such as: structure, investigations, data-driven approaches, and training/awareness.</p>
 							</div>
 						</div>
 						<div class="about__item" id="discipline">
@@ -95,8 +95,8 @@ get_header();
 							if($staff->have_posts()) {
 								while($staff->have_posts()) {
 									$staff->the_post();?>
-														<!-- Individual staff -->
-														<?php $slug = get_post_field( 'post_name', get_the_ID() ); ?>
+										<!-- Individual staff -->
+										<?php $slug = get_post_field( 'post_name', get_the_ID() ); ?>
 									<div class="staff__member<?php if ( wp_is_mobile() ){echo ' staff__is-mobile';}else{echo ' staff__is-desktop';}?>">
 										<span class="staff__overlay"></span>
 										<img class="staff__headshot" src="<?php the_post_thumbnail_url('staff-headshot'); ?>" alt="<?php the_title();?>">
@@ -118,24 +118,24 @@ get_header();
             <?php
             // Display Resources
             $resources = new WP_Query(array('post_type'=>'post', 'post_status'=>'publish', 'orderby'=> 'title', 'order' => 'ASC', 'posts_per_page'=>-1));
-                if( $resources->have_posts() ):
-                    while( $resources->have_posts() ):
-                        $resources->the_post(); ?>
-												<?php  
-															$pdfcp = get_field('download_pdf');?>
-                        <a class="resource" href="<?php echo $pdfcp['url']; ?>" title="Click here to download the <?php echo the_title();?> Quick Guide" target="_blank" download>
-                            
-													<div class="resource__download">
-														<?php echo svg_icon('resource__icon', 'download');?>
-													</div>
-													<h4 class="h4__header">Quick Guide</h4>
-													<p class="resource__name"  ><?php echo the_title(); ?></p>
-                        </a> 
-                    <?php endwhile;
-                else : ?> <p class="p__body">No featured resources at this time</p>
-                    <?php
-                wp_reset_postdata();
-                endif;
+							if( $resources->have_posts() ):
+									while( $resources->have_posts() ):
+											$resources->the_post(); ?>
+											<?php  
+														$pdfcp = get_field('download_pdf');?>
+											<a class="resource" href="<?php echo $pdfcp['url']; ?>" title="Click here to download the <?php echo the_title();?> Quick Guide" target="_blank" download>
+													
+												<div class="resource__download">
+													<?php echo svg_icon('resource__icon', 'download');?>
+												</div>
+												<h4 class="h4__header">Quick Guide</h4>
+												<p class="resource__name"  ><?php echo the_title(); ?></p>
+											</a> 
+									<?php endwhile;
+							else : ?> <p class="p__body">No featured resources at this time</p>
+									<?php
+							wp_reset_postdata();
+							endif;
             ?>
 					</div>
 					<div class="questions page-section" id="contact" data-matching-link="#contact-link">
@@ -145,4 +145,3 @@ get_header();
 				</section>
 	</main>
 <?php get_footer(); ?>
-
