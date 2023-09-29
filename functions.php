@@ -15,9 +15,11 @@
  * *    10. Display Home BG image
  * *    11. Display site navigation
  * *    12. Display mobile navigation
- * *    13.  Enable custom post types
+ * *    13. Enable custom post types
  * *    14. Change dashboard Posts to Resources
- */
+ * *    15. Add a section to the Customizer
+ * *    16. Add Social Media Links to Customizer settings
+ */ 
 
 // * * --------| Actions and filters in order |-------- *
 
@@ -27,6 +29,9 @@
   add_action('init', 'custom_post_types');
   add_action('login_enqueue_scripts', 'projectroadmap_login_css');
   add_action( 'init', 'cp_change_post_object' );
+  add_action('customize_register', 'custom_footer_disclaimer_customize_register');
+  add_action('customize_register', 'customizer_social_settings');
+
 
   // Asynchronously load scripts
   add_filter( 'clean_url', 'async_scripts', 11, 1 ); 
@@ -127,6 +132,8 @@ function prm_custom_logo_setup() {
     <?php }
     //. Display Home bg image
 
+  
+
    //* 11. Display site navigation
   function site_navigation() { ?>
   <!-- navigation -->
@@ -221,3 +228,67 @@ function cp_change_post_object() {
       $labels->menu_name = 'Resources';
       $labels->name_admin_bar = 'Resources';
 }
+
+//* 15. Add a section to the Customizer
+function custom_footer_disclaimer_customize_register($wp_customize) {
+  $wp_customize->add_section('footer_disclaimer_section', array(
+      'title' => 'Footer Disclaimer',
+      'priority' => 200,
+  ));
+
+  // Add a setting for the footer disclaimer text
+  $wp_customize->add_setting('footer_disclaimer_text', array(
+      'default' => '',
+      'type' => 'theme_mod',
+  ));
+
+  // Add a control to input the disclaimer text
+  $wp_customize->add_control('footer_disclaimer_text', array(
+      'label' => 'Footer Disclaimer Text',
+      'section' => 'footer_disclaimer_section',
+      'type' => 'textarea',
+  ));
+}
+//* 16 Add Social Media Links to Customizer settings
+function customizer_social_settings($wp_customize) {
+  // Add a section for social media links
+  $wp_customize->add_section('footer_social_section', array(
+      'title' => 'Footer Social Links',
+      'priority' => 201, // Adjust the priority as needed to control the display order
+  ));
+
+  // Add settings and controls for social media links
+  $wp_customize->add_setting('facebook_link', array(
+      'default' => '',
+      'sanitize_callback' => 'esc_url_raw',
+  ));
+
+  $wp_customize->add_setting('twitter_link', array(
+      'default' => '',
+      'sanitize_callback' => 'esc_url_raw',
+  ));
+
+  $wp_customize->add_setting('website_link', array(
+      'default' => '',
+      'sanitize_callback' => 'esc_url_raw',
+  ));
+
+  $wp_customize->add_control('facebook_link', array(
+      'label' => 'Facebook Link',
+      'section' => 'footer_social_section',
+      'type' => 'text',
+  ));
+
+  $wp_customize->add_control('twitter_link', array(
+      'label' => 'Twitter Link',
+      'section' => 'footer_social_section',
+      'type' => 'text',
+  ));
+
+  $wp_customize->add_control('website_link', array(
+      'label' => 'Custom Website Link',
+      'section' => 'footer_social_section',
+      'type' => 'text',
+  ));
+}
+

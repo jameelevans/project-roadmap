@@ -5,9 +5,7 @@
  * @package your-wp-project
  */
 
-get_header();
-
-?>
+get_header();?>
 	<main id="main-content">
         <section class="about page-section" id="about" data-matching-link="#about-link">
 					<div class="about__header">
