@@ -41,7 +41,7 @@
             <ul class="footer__list">
                 <li class="footer__item"><a class="footer__link" href="#about" title="Learn more about us">About</a></li>
                 <li class="footer__item"><a class="footer__link" href="#task-force" title="Learn more about our Task Force">Task Force</a></li>
-                <li class="footer__item"><a class="footer__link" href="#discipline" title="Learn more about desciplines">Decipline</a></li>
+                <li class="footer__item"><a class="footer__link" href="#discipline" title="Learn more about desciplines">Discipline</a></li>
                 <li class="footer__item"><a class="footer__link" href="#field-at-large" title="Learn more about the field at large">Field At-Large</a></li>
                 <li class="footer__item"><a class="footer__link" href="#team" title="Learn more about our staff">Staff</a></li>
                 <li class="footer__item"><a class="footer__link" href="#resources" title="Go to our Resources section">Resources</a></li>
