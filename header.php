@@ -18,10 +18,11 @@
 
 	<style>
 		.general-header {
-			background-image: linear-gradient(to right,
-			rgba(var(--color-dark-blue-a),0.95) 35%, rgba(var(--color-green-a), 0.9)),
+			background-image: linear-gradient(264deg, rgba(92, 134, 76, 0.75) -3.81%, rgba(1, 124, 138, 0.67) 21.3%, rgba(0, 34, 57, 0.75) 50.36%),
 			url("<?php if (has_post_thumbnail($post->ID)){ $image = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'single-post-thumbnail'); echo  $image[0];}else{ echo get_stylesheet_directory_uri() .  '/assets/img/backgrounds/header-bg.jpg';	}?>");	
 		}
+
+
 
 	@media screen and (max-width: 800px) {
 				.general-header{
