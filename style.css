@@ -55,6 +55,7 @@ Text Domain: projectroadmaptta.com
   --color-teal: #5DA8A1;
   --color-teal-a: 93, 168, 161;
   --color-dark-teal: #407873;
+  --color-alt-teal: #017C8A;
   --color-green: #3E6935;
   --color-green-a: 62, 105, 53;
   --color-grey: #E2E5EA;
@@ -253,12 +254,12 @@ body {
   background-image: linear-gradient(transparent calc(100% - 3px), var(--color-light-blue) 10px);
   background-repeat: no-repeat;
   background-size: 100% 100%;
-  -webkit-transition: background-image .3s ease-in-out;
-  transition: background-image .3s ease-in-out;
+  -webkit-transition: all .3s ease-in-out;
+  transition: all .3s ease-in-out;
 }
 
 .underline:hover, .underline:focus {
-  background-image: linear-gradient(transparent calc(100% - 3px), var(--color-green) 10px);
+  background-image: linear-gradient(transparent calc(100% - 3px), var(--color-alt-teal) 10px);
   -webkit-transition: background-image .3s ease-in-out;
   transition: background-image .3s ease-in-out;
 }

@@ -176,11 +176,11 @@ body {
   background-image: linear-gradient(transparent calc(100% - 3px), var(--color-light-blue) 10px);
   background-repeat: no-repeat;
   background-size: 100% 100%;
-  transition: background-image .3s ease-in-out;
+  transition: all .3s ease-in-out;
 
   &:hover,
   &:focus{
-    background-image: linear-gradient(transparent calc(100% - 3px), var(--color-green) 10px);
+    background-image: linear-gradient(transparent calc(100% - 3px), var(--color-alt-teal) 10px);
     transition: background-image .3s ease-in-out;
   }
 
