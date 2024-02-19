@@ -115,18 +115,26 @@ get_header();?>
 					<div class="resources__wrapper">
             <?php
             // Display Resources
-            $resources = new WP_Query(array('post_type'=>'post', 'post_status'=>'publish', 'orderby'=> 'title', 'order' => 'ASC', 'posts_per_page'=>-1));
+            $resources = new WP_Query(array(
+							'post_type'=>'post',
+							'post_status'=>'publish',
+							'orderby'=> 'title',
+							'order' => 'ASC',
+							'posts_per_page'=>-1));
 							if( $resources->have_posts() ):
-									while( $resources->have_posts() ):
-											$resources->the_post(); ?>
-											<?php  
+									while( $resources->have_posts() ): $resources->the_post(); 
+
+											// Get the first category of the post
+											$categories = get_the_category();
+											$category_name = !empty($categories) ? esc_html($categories[0]->name) : 'No Category'; // Fallback if no category
+
 														$pdfcp = get_field('download_pdf');?>
 											<a class="resource" href="<?php echo $pdfcp['url']; ?>" title="Click here to download the <?php echo the_title();?> Quick Guide" target="_blank" download>
 													
 												<div class="resource__download">
 													<?php echo svg_icon('resource__icon', 'download');?>
 												</div>
-												<h4 class="h4__header">Quick Guide</h4>
+												<h4 class="h4__header"><?php echo $category_name; ?></h4>
 												<p class="resource__name"  ><?php echo the_title(); ?></p>
 											</a> 
 									<?php endwhile;
