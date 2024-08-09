@@ -114,6 +114,17 @@
 						<div class="header__cta--wrapper"><a class="header__cta underline" href="<?php echo esc_url( $link_url ); ?>" target="<?php echo esc_attr( $link_target ); ?>" title="Learn more about <?php $link_title?> now" ><?php echo esc_html( $link_title ); ?></a><?php echo svg_icon('header__arrow', 'angle-right');?>
 						</div>
 				<?php endif;
+
+
+				$link = get_field('header_link_4');
+				if( $link && is_front_page()): 
+						$link_url = $link['url'];
+						$link_title = $link['title'];
+						$link_target = $link['target'] ? $link['target'] : '_self';
+						?>
+						<div class="header__cta--wrapper"><a class="header__cta underline" href="<?php echo esc_url( $link_url ); ?>" target="<?php echo esc_attr( $link_target ); ?>" title="Learn more about <?php $link_title?> now" ><?php echo esc_html( $link_title ); ?></a><?php echo svg_icon('header__arrow', 'angle-right');?>
+						</div>
+				<?php endif;
 				?>
 			</div>
 		</header><!-- .Header -->
