@@ -37,10 +37,57 @@
   }
 
   & .h2__heading {
-
+    margin-bottom: 1rem;
     /* Styling for h2 headings on medium screens */
+
     @include respond(medium) {
       text-align: center;
+    }
+  }
+
+  .body-cta {
+    align-items: center;
+    color: var(--color-black);
+    display: inline-flex;
+    font-size: 2.5rem;
+    font-weight: 700;
+    gap: .8rem;
+    text-decoration: none;
+    transition: color .3s ease-in-out;
+
+    &__arrow {
+      fill: currentColor;
+      flex: 0 0 auto;
+      height: 2.4rem;
+      transform: translateX(0);
+      transition: transform .3s ease-in-out;
+      width: 2.4rem;
+    }
+
+    &:hover,
+    &:focus-visible {
+      color: var(--color-dark-grey);
+    }
+
+    &:hover .body-cta__arrow,
+    &:focus-visible .body-cta__arrow {
+      transform: translateX(.5rem);
+    }
+
+    @include respond(medium) {
+      display: flex;
+      margin-inline: auto;
+      width: fit-content;
+    }
+  }
+
+  .strategy__header {
+    text-align: center;
+    padding: 3rem;
+    margin: 6rem 0 6.5rem;
+
+    @include respond(small) {
+      margin: 0 0 7rem 0;
     }
   }
 
@@ -77,7 +124,7 @@
 
     /* Styling for odd items */
     &:nth-of-type(odd) .about__details {
-      border-left: 3px solid #017C8A;
+      border-left: 3px solid #017c8a;
       padding-left: 5rem;
 
       /* Responsive styling for medium screens */
@@ -89,7 +136,7 @@
 
     /* Styling for even items */
     &:nth-of-type(even) .about__details {
-      border-right: 3px solid #017C8A;
+      border-right: 3px solid #017c8a;
       padding-right: 5rem;
       text-align: right;
 
@@ -115,11 +162,16 @@
       width: 100%;
       display: block;
       border-radius: 1.5rem;
+      transition: transform 3.5s ease-in-out;
 
       /* Responsive styling for medium screens */
       @include respond(medium) {
         border-radius: 0;
       }
+    }
+
+    &:hover .about__gradient img {
+      transform: scale(1.07);
     }
   }
 
@@ -145,6 +197,12 @@
     position: relative;
     display: inline-block;
     height: fit-content;
+    border-radius: 1.5rem;
+    overflow: hidden;
+
+    @include respond(medium) {
+      border-radius: 0;
+    }
 
     &:after {
       /* Gradient background */
@@ -156,7 +214,14 @@
       width: 100%;
       height: 100%;
       display: inline-block;
-      background: linear-gradient(252deg, rgba(7, 85, 140, 0.40) -2.45%, rgba(1, 124, 138, 0.40) 53.27%, rgba(62, 105, 53, 0.40) 98.82%);
+      pointer-events: none;
+      z-index: 1;
+      background: linear-gradient(
+        252deg,
+        rgba(7, 85, 140, 0.4) -2.45%,
+        rgba(1, 124, 138, 0.4) 53.27%,
+        rgba(62, 105, 53, 0.4) 98.82%
+      );
 
       /* Responsive styling for medium screens */
       @include respond(medium) {
@@ -166,25 +231,32 @@
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .about__item:hover .about__gradient img,
+  .about__gradient img,
+  .body-cta__arrow {
+    transform: none;
+    transition: none;
+  }
+}
+
 .staff {
   /* Staff section styling */
   padding: 8rem 8vw;
   text-align: center;
   min-height: 100%;
-  background: linear-gradient(0deg, rgba(var(--color-grey-a), 0.8), rgba(var(--color-grey-a), 0)), url("assets/img/backgrounds/staff-bg.jpg");
+  background:
+    linear-gradient(
+      0deg,
+      rgba(var(--color-grey-a), 0.8),
+      rgba(var(--color-grey-a), 0)
+    ),
+    url('assets/img/backgrounds/staff-bg.jpg');
   background-size: cover;
   background-attachment: fixed;
   background-position: bottom;
 
   &__wrapper {
-    /* Wrapper transformation */
-    transform: translateY(-25rem);
-
-    /* Responsive styling for medium screens */
-    @include respond(medium) {
-      transform: none;
-    }
-
     .h3__heading {
       /* Styling for h3 headings */
       font-weight: 500;
@@ -197,7 +269,8 @@
     border-radius: 4rem;
     color: var(--color-black);
     padding: 8rem;
-    margin: 0 auto 5rem;
+    /* Pull the header across the section boundary while keeping layout flow intact. */
+    margin: -25rem auto 5rem;
     text-align: center;
     max-width: 130rem;
 
@@ -205,6 +278,7 @@
     @include respond(medium) {
       border-radius: 0;
       padding: 5rem;
+      margin-top: 0;
     }
 
     p {
@@ -223,7 +297,8 @@
     padding: 0 0 10rem 0;
   }
 
-  & .h2__heading {}
+  & .h2__heading {
+  }
 
   &__content {
     /* Content styling */
@@ -242,7 +317,7 @@
     width: 19rem;
     margin: 3.5rem;
     text-decoration: none;
-    transition: all .5s ease;
+    transition: all 0.5s ease;
 
     &:focus {
       /* Focus styling */
@@ -262,7 +337,7 @@
       left: 0;
       z-index: 10;
       opacity: 0;
-      transition: all .5s ease;
+      transition: all 0.5s ease;
       background-color: var(--color-blue);
       border-radius: 8px;
 
@@ -275,7 +350,7 @@
     // Grey staff overlay is visible on hover
     &:focus .staff__overlay,
     &:hover .staff__overlay {
-      opacity: .8;
+      opacity: 0.8;
     }
 
     // Reveal staff details on member hover
@@ -363,7 +438,7 @@
     /* Styling for staff details */
     z-index: 10;
     width: 18.5rem;
-    transition: all .5s ease;
+    transition: all 0.5s ease;
 
     /* Responsive styling for medium screens */
     @include respond(medium) {
@@ -437,8 +512,7 @@
   width: 30rem;
   text-decoration: none;
   color: var(--color-black);
-  transition: all .3s ease-in-out;
-  
+  transition: all 0.3s ease-in-out;
 
   &:focus .resource__download,
   &:hover .resource__download {
@@ -450,7 +524,7 @@
   &:hover .resource__icon {
     /* Styling for resource icon on focus and hover */
     fill: var(--color-white);
-    transform: translateY(5px) scale(.93);
+    transform: translateY(5px) scale(0.93);
   }
 
   &:focus .resource__name,
@@ -469,7 +543,7 @@
     padding: 2rem;
     border-radius: 50%;
     margin: 0 auto;
-    transition: all .5s ease;
+    transition: all 0.5s ease;
   }
 
   &__icon {
@@ -478,7 +552,7 @@
     fill: var(--color-blue);
     width: 6.5rem;
     height: 6.5rem;
-    transition: all .3s ease-in-out;
+    transition: all 0.3s ease-in-out;
   }
 
   .h4__header {
@@ -492,13 +566,13 @@
     text-decoration: underline;
     font-weight: 600;
     font-size: 1.9rem;
-    transition: all .5s ease;
+    transition: all 0.5s ease;
   }
 }
 
 /* Styles for the .questions section */
 .questions {
-  background-color: var(--color-grey);
+  background-color: var(--color-grey-alt);
   border-radius: 4rem;
   padding: 5rem;
   margin-block-start: 2rem;
@@ -516,7 +590,7 @@
   &__email {
     color: var(--color-black);
     font-weight: 600;
-    transition: all .5s ease;
+    transition: all 0.5s ease;
 
     &:hover,
     &:focus {

@@ -20,6 +20,10 @@ class StickyHeader {
   runOnScroll() {
     this.determineScrollDirection()
 
+    if (!this.siteHeader) {
+      return
+    }
+
     if (window.scrollY > 60) {
       this.siteHeader.classList.add("header__top--scrolled")
     } else {
@@ -39,30 +43,31 @@ class StickyHeader {
   }
 
   calcSection(el) {
-    let scrollOffset = 0; // Initialize the scroll offset to 0
-  
-    // Check if the current section is the "about" section or "contact" section
-    if (el.classList.contains('staff__wrapper')) {
-      // If it is, set the scroll offset to -25rem (adjust as needed)
-      scrollOffset = -25 * parseFloat(getComputedStyle(document.documentElement).fontSize);
+    const matchingLink = el.getAttribute("data-matching-link")
+    const currentLink = matchingLink ? document.querySelector(matchingLink) : null
+
+    if (!currentLink) {
+      return
     }
-  
-    if (window.scrollY + this.browserHeight > el.offsetTop - scrollOffset && window.scrollY < el.offsetTop + el.offsetHeight - scrollOffset) {
+
+    if (window.scrollY + this.browserHeight > el.offsetTop && window.scrollY < el.offsetTop + el.offsetHeight) {
       let scrollPercent = el.getBoundingClientRect().top / this.browserHeight * 100
-  
-      // Add a condition to check if scrollPercent is in the range [0, 50] (adjust as needed)
+
       if (scrollPercent >= 0 && scrollPercent <= 50) {
-        let matchingLink = el.getAttribute("data-matching-link");
         document.querySelectorAll(`.navigation__link:not(${matchingLink})`).forEach(el => el.classList.remove("is-current-link"));
-        document.querySelector(matchingLink).classList.add("is-current-link");
+        currentLink.classList.add("is-current-link");
       }
     }
-  
+
     // Check if the user has scrolled to the bottom of the page
     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-      let contactLink = document.querySelector('[data-matching-link="#contact-link"]');
-      document.querySelectorAll(`.navigation__link:not(${contactLink.getAttribute('data-matching-link')})`).forEach(el => el.classList.remove("is-current-link"));
-      contactLink.classList.add("is-current-link");
+      const contactSection = document.querySelector('[data-matching-link="#contact-link"]')
+      const contactLink = document.querySelector("#contact-link")
+
+      if (contactSection && contactLink) {
+        document.querySelectorAll(".navigation__link").forEach(link => link.classList.remove("is-current-link"))
+        contactLink.classList.add("is-current-link")
+      }
     }
   }
 }

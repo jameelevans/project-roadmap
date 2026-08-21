@@ -29,6 +29,8 @@ node_modules/
 **.DS_Store*
 ehthumbs.db
 Icon?
+!assets/img/icons/
+!assets/img/icons/*.svg
 Thumbs.db
 ._*
 

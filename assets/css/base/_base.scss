@@ -17,6 +17,16 @@ html {
   }
 }
 
+.page-section {
+  scroll-margin-top: 8rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 // Selection background color
 ::selection {
   background-color: var(--color-blue);

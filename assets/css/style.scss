@@ -70,6 +70,12 @@ Text Domain: projectroadmaptta.com
 //  * Back Top
 @import "components/backtop";
 
+//  * Resource filter controls
+@import "components/resources-filter";
+
+//  * Resource cards
+@import "components/resource-card";
+
 //*--------| Layouts |--------*//
 // *Header
 @import "layout/header";
@@ -92,3 +98,6 @@ Text Domain: projectroadmaptta.com
 
 //* 404 page
 @import "pages/404-page";
+
+//* Resources page
+@import "pages/resources-page";

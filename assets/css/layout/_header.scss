@@ -110,6 +110,10 @@
       text-align: center;
       /* Center-align text on medium screens */
     }
+
+    body:not(.home) & {
+      padding: 5vw 0;
+    }
   }
 
   /* Header main heading */

@@ -3,7 +3,6 @@ import gulpSass from 'gulp-sass';
 import * as dartSass from 'sass';
 import gulpAutoprefixer from 'gulp-autoprefixer';
 import browserSync from 'browser-sync';
-import notify from 'gulp-notify';
 import settings from './settings.mjs';
 import imagemin from 'gulp-imagemin';
 import imageminGifsicle from 'imagemin-gifsicle';
@@ -13,6 +12,27 @@ import imageminSvgo from 'imagemin-svgo';
 import { deleteAsync } from 'del';
 
 const sass = gulpSass(dartSass);
+
+function taskComplete(message) {
+  console.log(message);
+}
+
+// Keep WordPress editor pages on Local's native origin. BrowserSync's proxy URL
+// rewriting can corrupt escaped block-editor bootstrap data inside admin HTML.
+function redirectWordPressAdmin(req, res, next) {
+  const acceptsHtml = (req.headers.accept || '').includes('text/html');
+  const isAdminRequest = /^\/wp-admin(?:\/|$)/.test(req.url);
+  const isLoginRequest = /^\/wp-login\.php(?:\?|$)/.test(req.url);
+
+  if (!acceptsHtml || (!isAdminRequest && !isLoginRequest)) {
+    next();
+    return;
+  }
+
+  const directUrl = new URL(req.url, settings.urlToPreview);
+  res.writeHead(302, { Location: directUrl.toString() });
+  res.end();
+}
 
 async function getWebpack() {
   const { default: webpack } = await import('webpack');
@@ -40,29 +60,18 @@ gulp.task('styles', () => {
     .pipe(gulpAutoprefixer(settings.BROWSERS_LIST))
     .on('error', (error) => console.log(error.toString()))
     .pipe(gulp.dest(settings.styleDestination))
-    .pipe(
-      notify({
-        message: '✅ Styles task completed',
-        onLast: true,
-      })
-    );
+    .on('end', () => taskComplete('Styles task completed'));
 });
 
 // Scripts task
-gulp.task('scripts', async (callback) => {
+gulp.task('scripts', async () => {
   const { webpack, webpackStream, webpackConfig } = await getWebpack();
   return gulp
     .src(settings.jsMain)
     .pipe(webpackStream(webpackConfig.default, webpack))
-    .pipe(gulp.dest(settings.jsBundled))
+    .pipe(gulp.dest(settings.jsDestination))
     .on('error', (error) => console.log(error.toString()))
-    .pipe(
-      notify({
-        message: '✅ Scripts task completed',
-        onLast: true,
-      })
-    );
-  callback();
+    .on('end', () => taskComplete('Scripts task completed'));
 });
 
 // Images task for PNG, JPEG, GIF
@@ -77,12 +86,7 @@ gulp.task('images', () => {
       ])
     )
     .pipe(gulp.dest(settings.imgDST))
-    .pipe(
-      notify({
-        message: '✅ Minified images',
-        onLast: true,
-      })
-    );
+    .on('end', () => taskComplete('Minified images'));
 });
 
 // SVG task
@@ -97,12 +101,7 @@ gulp.task('svg', () => {
       ])
     )
     .pipe(gulp.dest(settings.imgDST))
-    .pipe(
-      notify({
-        message: '✅ Minified SVGs',
-        onLast: true,
-      })
-    );
+    .on('end', () => taskComplete('Minified SVGs'));
 });
 
 // Watch task
@@ -111,6 +110,8 @@ gulp.task('watch', () => {
     notify: false,
     proxy: settings.urlToPreview,
     ghostMode: false,
+    middleware: [redirectWordPressAdmin],
+    open: 'local',
   });
 
   gulp.watch(settings.watchPhp, (done) => {
@@ -119,8 +120,8 @@ gulp.task('watch', () => {
   });
   gulp.watch(settings.watchStyles, gulp.series('styles')).on('change', browserSync.reload);
   gulp.watch([settings.watchJsModules, settings.watchJsMain], gulp.series('clean-scripts', 'scripts')).on('change', browserSync.reload);
-  gulp.watch([settings.imgSRC, '!**/*.svg'], gulp.series('images')).on('change', browserSync.reload);
-  gulp.watch('assets/img/raw/**/*.svg', gulp.series('svg')).on('change', browserSync.reload);
+  // Image files in this Local/iCloud setup can emit repeated change events.
+  // Run `npm run images` manually when image optimization is needed.
 });
 
 gulp.task('default', gulp.series('styles', 'clean-scripts', 'scripts', 'images', 'svg', 'watch'));

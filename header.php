@@ -5,6 +5,21 @@
  * @package your-wp-project
  */
 ?>
+	<?php
+	$header_image = get_stylesheet_directory_uri() . '/assets/img/backgrounds/header-bg.jpg';
+
+	if ( is_page( 'resources' ) ) {
+		$header_image = get_stylesheet_directory_uri() . '/assets/img/backgrounds/resources-hero.jpg';
+	}
+
+	if ( isset( $post->ID ) && has_post_thumbnail( $post->ID ) ) {
+		$image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'full' );
+
+		if ( ! empty( $image[0] ) ) {
+			$header_image = $image[0];
+		}
+	}
+	?>
 	<!doctype html>
 	<html <?php language_attributes(); ?>>
 
@@ -14,12 +29,11 @@
 		<meta http-equiv="x-ua-compatible" content="ie=edge">
 		<link rel="profile" href="https://gmpg.org/xfn/11">
 		<?php wp_head(); ?>
-	</head>
 
 	<style>
 		.general-header {
 			background-image: linear-gradient(264deg, rgba(92, 134, 76, 0.75) -3.81%, rgba(1, 124, 138, 0.67) 21.3%, rgba(0, 34, 57, 0.75) 50.36%),
-			url("<?php if (has_post_thumbnail($post->ID)){ $image = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'single-post-thumbnail'); echo  $image[0];}else{ echo get_stylesheet_directory_uri() .  '/assets/img/backgrounds/header-bg.jpg';	}?>");	
+			url("<?php echo esc_url( $header_image ); ?>");
 		}
 
 
@@ -28,28 +42,30 @@
 				.general-header{
 				background-image: linear-gradient(to bottom,
 				rgba(var(--color-dark-blue-a), .95), rgba(var(--color-blue-a), 0.95)),
-				url("<?php if (has_post_thumbnail($post->ID)){ $image = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'single-post-thumbnail'); echo  $image[0];}else{ echo get_stylesheet_directory_uri() .  '/assets/img/backgrounds/header-bg.jpg';	}?>");
+				url("<?php echo esc_url( $header_image ); ?>");
 			}
 		}
 
 
 		
 	</style>
+	</head>
 
-	<body class="container front-page" id="top">
-		<a class="screen-reader-shortcut" href="#main-content" tabindex="1">Skip to main content</a>
+	<body <?php body_class( 'container' ); ?> id="top">
+		<?php wp_body_open(); ?>
+		<a class="screen-reader-shortcut" href="#main-content">Skip to main content</a>
 		
 		<!-- Header -->
-		<header id="top" class="header general-header"  role="banner">
+		<header class="header general-header">
 			<div class="header__top">
 				<!-- Logo image-->
-				<a class="header__logo" href="#top" title="Click here to go to the Home page">
+				<a class="header__logo" href="<?php echo esc_url( home_url( '/' ) ); ?>" aria-label="<?php echo esc_attr( get_bloginfo( 'name' ) . ' home' ); ?>">
 					<?php
 					// If logo uploaded to customizer display it, if not show nothing
 					$custom_logo_id = get_theme_mod( 'custom_logo' );
 					$logo = wp_get_attachment_image_src( $custom_logo_id , 'full' );
 					if ( has_custom_logo() ) {
-						echo '<img class="header__icon" src="' . esc_url( $logo[0] ) . '"' . 'alt="' . get_bloginfo( 'name' ) . '" draggable="false">';
+						echo '<img class="header__icon" src="' . esc_url( $logo[0] ) . '" alt="' . esc_attr( get_bloginfo( 'name' ) ) . '" draggable="false">';
 					} else {
 						echo '';
 					} ?>
@@ -68,7 +84,7 @@
 							}else if (is_404()) {
 								echo '404 Error';
 							} else {
-							echo the_title();
+							echo get_the_title();
 							}
 						?>
 				</h1>
@@ -76,7 +92,9 @@
 				<div class="header__description">
 					<?php
 						if (is_front_page()) {
-							echo the_content();
+							the_content();
+						} else if (is_page( 'resources' )) {
+							echo 'Tools, guides, and downloadable resources for ECM task forces.';
 						} else if (is_404()) {
 							echo 'Sorry You may be lost!';
 						} 

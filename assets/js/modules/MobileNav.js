@@ -7,43 +7,46 @@ class MobileNav {
     this.mobileContent = $(".mobile-navigation__nav");
     this.mobileIcon = $(".mobile-navigation__icon");
     this.body = $(".container");
+    this.mobileLinks = this.mobileContent.find("a");
 
     this.events();
   }
 
   events() {
-    this.mobileMenu.click(this.toggleMenu.bind(this));
+    this.mobileMenu.click(() => this.setMenuState(!this.isOpen()));
     $(document).keyup(this.keyPressHandler.bind(this));
-    
-    // Add an event handler for links within the mobile menu
-    this.mobileContent.find('a').click(this.closeMenu.bind(this));
+    this.mobileLinks.click(this.closeMenu.bind(this));
   }
 
   keyPressHandler(e) {
-    if (e.key === 'Escape' && this.mobileIcon.hasClass("mobile-navigation__icon--close-x")) {
-      this.toggleMenu();
+    if (e.key === 'Escape' && this.isOpen()) {
+      this.setMenuState(false, true);
     }
   }
 
-  toggleMenu() {
-    this.mobileContent.toggleClass("mobile-navigation__nav--is-visible");
-    this.mobileBackground.toggleClass("mobile-navigation__background--is-expanded");
-    this.mobileIcon.toggleClass("mobile-navigation__icon--close-x");
-    this.body.toggleClass("fixed-position");
-
-    // Toggle ARIA attributes here
-    this.toggleAria();
+  isOpen() {
+    return this.mobileContent.hasClass("mobile-navigation__nav--is-visible");
   }
 
-  toggleAria() {
-    // Implement your ARIA attribute toggling logic here
-    // You can reference this.mobileContent and this.mobileIcon as needed
+  setMenuState(isOpen, returnFocus = false) {
+    this.mobileContent.toggleClass("mobile-navigation__nav--is-visible", isOpen);
+    this.mobileBackground.toggleClass("mobile-navigation__background--is-expanded", isOpen);
+    this.mobileIcon.toggleClass("mobile-navigation__icon--close-x", isOpen);
+    this.body.toggleClass("fixed-position", isOpen);
+    this.mobileMenu.attr("aria-expanded", isOpen ? "true" : "false");
+    this.mobileMenu.attr("aria-label", isOpen ? "Close main menu" : "Open main menu");
+    this.mobileContent.attr("aria-hidden", isOpen ? "false" : "true");
+
+    if (isOpen && this.mobileLinks.length) {
+      this.mobileLinks.first().trigger("focus");
+    } else if (returnFocus) {
+      this.mobileMenu.trigger("focus");
+    }
   }
 
   closeMenu() {
-    // Close the menu when a link is clicked
-    if (this.mobileIcon.hasClass("mobile-navigation__icon--close-x")) {
-      this.toggleMenu();
+    if (this.isOpen()) {
+      this.setMenuState(false);
     }
   }
 }

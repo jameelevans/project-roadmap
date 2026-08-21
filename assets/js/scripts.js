@@ -9,9 +9,11 @@ import $ from 'jquery';
 import MobileNav from './modules/MobileNav'; 
 import StickyHeader from './modules/StickyHeader';
 import BackTop from './modules/BackTop';
+import ResourceFilter from './modules/ResourceFilter';
 
 
 // Instantiate a new object using our modules/classes
 var mobilenav = new MobileNav();
 var stickyHeader = new StickyHeader();
 let backTop = new BackTop();
+let resourceFilter = new ResourceFilter();

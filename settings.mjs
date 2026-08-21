@@ -15,6 +15,7 @@ const settings = {
     jsWebpack: './webpack.config.js', // Path to Webpack config file 
     jsMain: "./assets/js/scripts.js", // Path to main js file
     jsBundled: "./assets/js/scripts-bundled.js", // Path to bundled js file
+    jsDestination: "./assets/js/", // Path to place the bundled JS file
   
     // Images options
     imgSRC: './assets/img/raw/**/*', // Source folder of images which should be optimized and watched

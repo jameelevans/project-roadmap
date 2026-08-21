@@ -1,6 +1,11 @@
-class BackToTop {
+class BackTop {
   constructor() {
     this.backTopBtn = document.querySelector(".backtop");
+
+    if (!this.backTopBtn) {
+      return;
+    }
+
     this.createBackToTopButton();
     this.addScrollListener();
   }
@@ -25,5 +30,4 @@ class BackToTop {
   }
 }
 
-// Usage
-new BackToTop();
+export default BackTop;

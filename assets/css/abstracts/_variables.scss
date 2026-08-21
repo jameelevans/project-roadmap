@@ -6,37 +6,83 @@
 
 // * --------| Color variables |-------- *
 :root {
-  --color-blue: #07558C;
+  --color-blue: #07558c;
   --color-blue-a: 7, 85, 140;
 
   --color-dark-blue: #032841;
   --color-dark-blue-a: 3, 40, 65;
 
-  --color-light-blue: #4C9FD6;
+  --color-light-blue: #4c9fd6;
   --color-light-blue-a: 25, 161, 219;
 
-
-  --color-alt-blue: #E1EEEF;
+  --color-alt-blue: #e1eeef;
   --color-alt-blue-a: 225, 238, 239;
 
-  --color-teal: #5DA8A1;
+  --color-teal: #5da8a1;
   --color-teal-a: 93, 168, 161;
 
   --color-dark-teal: #407873;
 
-  --color-alt-teal: #017C8A;
+  --color-alt-teal: #017c8a;
 
-  --color-green: #3E6935;
+  --color-green: #3e6935;
   --color-green-a: 62, 105, 53;
 
-  --color-grey: #E2E5EA;
+  --color-grey: #e2e5ea;
   --color-grey-a: 226, 229, 234;
 
-  --color-dark-grey: #44546A;
+  --color-grey-alt: #f3f3f0;
+  --color-grey-alt-a: 243, 243, 240;
+
+  --color-silver: #d9d9d9;
+  --color-silver-a: 217, 217, 217;
+
+  --color-dark-grey: #44546a;
   --color-dark-grey-a: 68, 84, 106;
 
-  --color-purple: #954F72;
+  --color-purple: #954f72;
   --color-purple-a: 149, 29, 114;
+
+  --color-resource-accent: #16537f;
+  --color-resource-accent-a: 22, 83, 127;
+  --color-resource-accent-deep: #002951;
+  --color-resource-text: #000000;
+  --color-resource-text-secondary: #333232;
+  --color-resource-text-tertiary: #6b6b6a;
+  --color-resource-border: rgba(0, 41, 81, 0.12);
+  --color-resource-border-strong: rgba(0, 41, 81, 0.28);
+
+  --color-resource-page: #ffffff;
+  --color-resource-panel: #f1f3f6;
+  --color-resource-card: #fafafa;
+  --color-resource-card-border: #e5e7eb;
+  --color-resource-card-border-hover: #d8dce2;
+  --color-resource-card-hover: #f0f2f5;
+
+  --color-resource-tool: #3e6935;
+  --color-resource-tool-a: 62, 105, 53;
+  --color-resource-tool-bg: #d3ddd1;
+  --color-resource-tool-bg-hover: #b1c5ad;
+
+  --color-resource-guide: #16537f;
+  --color-resource-guide-a: 22, 83, 127;
+  --color-resource-guide-bg: #dfe5ea;
+  --color-resource-guide-bg-hover: #b2c4d1;
+
+  --color-resource-quick-guide: #a97800;
+  --color-resource-quick-guide-a: 169, 120, 0;
+  --color-resource-quick-guide-bg: #f5e5b1;
+  --color-resource-quick-guide-bg-hover: #f6da84;
+
+  --color-resource-window: #017c8a;
+  --color-resource-window-a: 1, 124, 138;
+  --color-resource-window-bg: #c4dde0;
+  --color-resource-window-bg-hover: #93c5ca;
+
+  --color-resource-fireside-chat: #8a5e13;
+  --color-resource-fireside-chat-a: 138, 94, 19;
+  --color-resource-fireside-chat-bg: #ddcca5;
+  --color-resource-fireside-chat-bg-hover: #d1b77e;
 
   --color-black: #000000;
 
@@ -44,17 +90,12 @@
   --color-white-a: 255, 255, 255;
 
   --border-radius: 10rem;
-  
+
   --bottom-margin: 1.5rem;
 
-
-  --gradient-primary: linear-gradient(45deg, rgba(25, 161, 219, .6), rgba(62, 105, 53, .6),
+  --gradient-primary: linear-gradient(
+    45deg,
+    rgba(25, 161, 219, 0.6),
+    rgba(62, 105, 53, 0.6)
   );
 }
-
-
-
-
-
-
-
