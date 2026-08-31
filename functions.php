@@ -42,6 +42,7 @@
   add_filter('login_headertitle', 'projectroadmap_login_title');
   add_filter( 'manage_post_posts_columns', 'projectroadmap_resource_admin_columns' );
   add_action( 'manage_post_posts_custom_column', 'projectroadmap_resource_admin_column_content', 10, 2 );
+  add_action( 'wp_head', 'projectroadmap_meta_description', 1 );
   
 
 // * * --------| Functions in order |-------- *
@@ -100,6 +101,27 @@
     return $fallback;
   }
 
+  //* Add a concise, page-specific description when no SEO plugin supplies one.
+  function projectroadmap_meta_description() {
+    if ( is_admin() ) {
+      return;
+    }
+
+    if ( is_front_page() ) {
+      $description = __( 'Project Roadmap provides training, technical assistance, tools, and resources for OVC Enhanced Collaborative Model task forces.', 'projectroadmaptta.com' );
+    } elseif ( is_page( 'resources' ) ) {
+      $description = __( 'Search and download Project Roadmap tools, guides, templates, and resources for OVC Enhanced Collaborative Model task forces.', 'projectroadmaptta.com' );
+    } elseif ( is_singular() && has_excerpt() ) {
+      $description = get_the_excerpt();
+    } else {
+      $description = get_bloginfo( 'description' );
+    }
+
+    if ( $description ) {
+      printf( "\n<meta name=\"description\" content=\"%s\">\n", esc_attr( wp_strip_all_tags( $description ) ) );
+    }
+  }
+
   //* 1. Enqueuing styles and scripts
   function theme_enqueue_scripts() {
   $script_path = get_template_directory() . '/assets/js/scripts-bundled.js';
@@ -130,6 +152,7 @@ function prm_custom_logo_setup() {
       'header-text' => array( 'Project Roadmap', 'Be curious, unlearn, evolve.' ),
   );
   add_theme_support( 'custom-logo', $defaults );
+  add_theme_support( 'title-tag' );
 
     //* 4. Enable support for custom sized Post Thumbnails on posts and pages
     add_image_size( 'my-thumbnail', 300, 169, false);
@@ -177,10 +200,8 @@ function prm_custom_logo_setup() {
 
   //* 9.  Display inline svg icon from sprite sheet with custom class
   function svg_icon($class, $icon) { ?>
-  <svg class="<?php echo $class ?>" aria-hidden="true">
-    <use
-      xlink:href="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/img/sprite.svg' ); ?>#icon-<?php echo $icon ?>">
-    </use>
+  <svg class="<?php echo esc_attr( $class ); ?>" aria-hidden="true" focusable="false">
+    <use href="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/img/sprite.svg#icon-' . sanitize_key( $icon ) ); ?>"></use>
   </svg>
   <?php } 
   // .Display inline svg icon from sprite sheet with custom class
@@ -232,7 +253,7 @@ function prm_custom_logo_setup() {
       <!-- navigation menu icon-->
       <span class="mobile-navigation__icon" aria-hidden="true">&nbsp;</span>
     </button>
-      <nav class="mobile-navigation__nav" id="mobile-navigation" aria-label="Mobile navigation" aria-hidden="true">
+      <nav class="mobile-navigation__nav" id="mobile-navigation" aria-label="Mobile navigation" aria-hidden="true" inert>
         <ul class="mobile-navigation__list">
           <li class="mobile-navigation__item">
             <a href="<?php echo esc_url( projectroadmap_section_url( 'about' ) ); ?>" class="mobile-navigation__link" title="Go to the About section">About</a>

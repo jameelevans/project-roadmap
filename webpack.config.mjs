@@ -27,7 +27,8 @@ export default {
       },
     ],
   },
-  mode: 'development',
+  // Production mode keeps the front-end bundle small while retaining source modules.
+  mode: 'production',
   resolve: {
     extensions: ['.js'],
   },

@@ -1,21 +1,21 @@
-import $ from 'jquery';
-
 class MobileNav {
   constructor() {
-    this.mobileBackground = $(".mobile-navigation__background");
-    this.mobileMenu = $(".mobile-navigation__menu");
-    this.mobileContent = $(".mobile-navigation__nav");
-    this.mobileIcon = $(".mobile-navigation__icon");
-    this.body = $(".container");
-    this.mobileLinks = this.mobileContent.find("a");
+    this.mobileBackground = document.querySelector(".mobile-navigation__background");
+    this.mobileMenu = document.querySelector(".mobile-navigation__menu");
+    this.mobileContent = document.querySelector(".mobile-navigation__nav");
+    this.mobileIcon = document.querySelector(".mobile-navigation__icon");
+    this.body = document.body;
+    this.mobileLinks = this.mobileContent ? this.mobileContent.querySelectorAll("a") : [];
 
-    this.events();
+    if (this.mobileMenu && this.mobileContent) {
+      this.events();
+    }
   }
 
   events() {
-    this.mobileMenu.click(() => this.setMenuState(!this.isOpen()));
-    $(document).keyup(this.keyPressHandler.bind(this));
-    this.mobileLinks.click(this.closeMenu.bind(this));
+    this.mobileMenu.addEventListener("click", () => this.setMenuState(!this.isOpen()));
+    document.addEventListener("keyup", this.keyPressHandler.bind(this));
+    this.mobileLinks.forEach((link) => link.addEventListener("click", this.closeMenu.bind(this)));
   }
 
   keyPressHandler(e) {
@@ -25,22 +25,23 @@ class MobileNav {
   }
 
   isOpen() {
-    return this.mobileContent.hasClass("mobile-navigation__nav--is-visible");
+    return this.mobileContent.classList.contains("mobile-navigation__nav--is-visible");
   }
 
   setMenuState(isOpen, returnFocus = false) {
-    this.mobileContent.toggleClass("mobile-navigation__nav--is-visible", isOpen);
-    this.mobileBackground.toggleClass("mobile-navigation__background--is-expanded", isOpen);
-    this.mobileIcon.toggleClass("mobile-navigation__icon--close-x", isOpen);
-    this.body.toggleClass("fixed-position", isOpen);
-    this.mobileMenu.attr("aria-expanded", isOpen ? "true" : "false");
-    this.mobileMenu.attr("aria-label", isOpen ? "Close main menu" : "Open main menu");
-    this.mobileContent.attr("aria-hidden", isOpen ? "false" : "true");
+    this.mobileContent.classList.toggle("mobile-navigation__nav--is-visible", isOpen);
+    this.mobileBackground?.classList.toggle("mobile-navigation__background--is-expanded", isOpen);
+    this.mobileIcon?.classList.toggle("mobile-navigation__icon--close-x", isOpen);
+    this.body.classList.toggle("fixed-position", isOpen);
+    this.mobileMenu.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    this.mobileMenu.setAttribute("aria-label", isOpen ? "Close main menu" : "Open main menu");
+    this.mobileContent.setAttribute("aria-hidden", isOpen ? "false" : "true");
+    this.mobileContent.inert = !isOpen;
 
     if (isOpen && this.mobileLinks.length) {
-      this.mobileLinks.first().trigger("focus");
+      this.mobileLinks[0].focus();
     } else if (returnFocus) {
-      this.mobileMenu.trigger("focus");
+      this.mobileMenu.focus();
     }
   }
 

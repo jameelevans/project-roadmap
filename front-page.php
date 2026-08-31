@@ -15,6 +15,7 @@ get_header();?>
 			<section class="about__header page-section" id="resources-link" aria-labelledby="home-resources-heading" data-matching-link="#resources-nav-link">
 				<h2 class="h2__heading" id="home-resources-heading">Resources</h2>
 				<p class="body-text">Tools, guides, and templates for ECM task forces. Search, filter by type, or browse the full library below.</p>
+				<?php // Follow the published Resources page even if its permalink changes. ?>
 				<a class="body-cta" href="<?php echo esc_url( projectroadmap_resources_url() ); ?>">
 					<span>Explore Resources</span>
 					<?php svg_icon( 'body-cta__arrow', 'angle-right' ); ?>
@@ -30,7 +31,7 @@ get_header();?>
 				<div class="about__wrapper">
 				<article class="about__item" id="task-force">
 					<div class="about__gradient">
-						<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/img/backgrounds/task-force.jpg' ); ?>" alt="Investigators reviewing case information together" loading="lazy">
+						<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/img/backgrounds/task-force.jpg' ); ?>" alt="Investigators reviewing case information together" width="1000" height="667" loading="lazy" decoding="async">
 					</div>
 					<div class="about__details">
 						<h3 class="h3__heading">Task Force</h3>
@@ -39,7 +40,7 @@ get_header();?>
 				</article>
 				<article class="about__item" id="discipline">
 					<div class="about__gradient">
-						<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/img/backgrounds/discipline.jpg' ); ?>" alt="Presenter leading a professional workshop" loading="lazy">
+						<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/img/backgrounds/discipline.jpg' ); ?>" alt="Presenter leading a professional workshop" width="1000" height="667" loading="lazy" decoding="async">
 					</div>
 					<div class="about__details">
 						<h3 class="h3__heading">Discipline</h3>
@@ -48,7 +49,7 @@ get_header();?>
 				</article>
 				<article class="about__item" id="field-at-large">
 					<div class="about__gradient">
-						<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/img/backgrounds/field-at-large.jpg' ); ?>" alt="Workshop participants raising their hands" loading="lazy">
+						<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/img/backgrounds/field-at-large.jpg' ); ?>" alt="Workshop participants raising their hands" width="1000" height="667" loading="lazy" decoding="async">
 					</div>
 					<div class="about__details">
 						<h3 class="h3__heading">Field At-Large</h3>
@@ -83,7 +84,18 @@ get_header();?>
 								<?php $slug = get_post_field( 'post_name', get_the_ID() ); ?>
 								<div class="staff__member<?php if ( wp_is_mobile() ){echo ' staff__is-mobile';}else{echo ' staff__is-desktop';}?>" >
 									<span class="staff__overlay"></span>
-									<img class="staff__headshot" src="<?php echo esc_url( get_the_post_thumbnail_url( get_the_ID(), 'staff-headshot' ) ); ?>" alt="<?php echo esc_attr( get_the_title() ); ?>" loading="lazy">
+									<?php
+									echo get_the_post_thumbnail(
+										get_the_ID(),
+										'staff-headshot',
+										array(
+											'class'    => 'staff__headshot',
+											'alt'      => get_the_title(),
+											'loading'  => 'lazy',
+											'decoding' => 'async',
+										)
+									);
+									?>
 									<div class="staff__details">
 										<p class="staff__name"><?php the_title();?></p>
 									</div>
@@ -112,7 +124,18 @@ get_header();?>
 									<?php $slug = get_post_field( 'post_name', get_the_ID() ); ?>
 								<div class="staff__member<?php if ( wp_is_mobile() ){echo ' staff__is-mobile';}else{echo ' staff__is-desktop';}?>">
 									<span class="staff__overlay"></span>
-								<img class="staff__headshot" src="<?php echo esc_url( get_the_post_thumbnail_url( get_the_ID(), 'staff-headshot' ) ); ?>" alt="<?php echo esc_attr( get_the_title() ); ?>" loading="lazy">
+								<?php
+								echo get_the_post_thumbnail(
+									get_the_ID(),
+									'staff-headshot',
+									array(
+										'class'    => 'staff__headshot',
+										'alt'      => get_the_title(),
+										'loading'  => 'lazy',
+										'decoding' => 'async',
+									)
+								);
+								?>
 									<div class="staff__details">
 										<p class="staff__name"><?php the_title();?></p>
 									</div>

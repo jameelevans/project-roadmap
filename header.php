@@ -6,10 +6,10 @@
  */
 ?>
 	<?php
-	$header_image = get_stylesheet_directory_uri() . '/assets/img/backgrounds/header-bg.jpg';
+	$header_image = get_stylesheet_directory_uri() . '/assets/img/backgrounds/header-bg.webp';
 
 	if ( is_page( 'resources' ) ) {
-		$header_image = get_stylesheet_directory_uri() . '/assets/img/backgrounds/resources-hero.jpg';
+		$header_image = get_stylesheet_directory_uri() . '/assets/img/backgrounds/resources-hero.webp';
 	}
 
 	if ( isset( $post->ID ) && has_post_thumbnail( $post->ID ) ) {
@@ -28,6 +28,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<meta http-equiv="x-ua-compatible" content="ie=edge">
 		<link rel="profile" href="https://gmpg.org/xfn/11">
+		<link rel="preload" href="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/fonts/open-sans-latin-variable.woff2' ); ?>" as="font" type="font/woff2" crossorigin>
+		<link rel="preload" href="<?php echo esc_url( $header_image ); ?>" as="image" fetchpriority="high">
 		<?php wp_head(); ?>
 
 	<style>
@@ -63,9 +65,19 @@
 					<?php
 					// If logo uploaded to customizer display it, if not show nothing
 					$custom_logo_id = get_theme_mod( 'custom_logo' );
-					$logo = wp_get_attachment_image_src( $custom_logo_id , 'full' );
 					if ( has_custom_logo() ) {
-						echo '<img class="header__icon" src="' . esc_url( $logo[0] ) . '" alt="' . esc_attr( get_bloginfo( 'name' ) ) . '" draggable="false">';
+						echo wp_get_attachment_image(
+							$custom_logo_id,
+							'full',
+							false,
+							array(
+								'class'     => 'header__icon',
+								'alt'       => get_bloginfo( 'name' ),
+								'draggable' => 'false',
+								'loading'   => 'eager',
+								'decoding'  => 'async',
+							)
+						);
 					} else {
 						echo '';
 					} ?>
@@ -108,7 +120,7 @@
 							$link_title = $link['title'];
 							$link_target = $link['target'] ? $link['target'] : '_self';
 							?>
-							<div class="header__cta--wrapper"><a class="header__cta underline" href="<?php echo esc_url( $link_url ); ?>" target="<?php echo esc_attr( $link_target ); ?>" title="Learn more about <?php $link_title?> now" ><?php echo esc_html( $link_title ); ?></a><?php echo svg_icon('header__arrow', 'angle-right');?>
+							<div class="header__cta--wrapper"><a class="header__cta underline" href="<?php echo esc_url( $link_url ); ?>" target="<?php echo esc_attr( $link_target ); ?>"><?php echo esc_html( $link_title ); ?></a><?php echo svg_icon('header__arrow', 'angle-right');?>
 							</div>
 					<?php endif;
 				
@@ -119,7 +131,7 @@
 						$link_title = $link['title'];
 						$link_target = $link['target'] ? $link['target'] : '_self';
 						?>
-						<div class="header__cta--wrapper"><a class="header__cta underline" href="<?php echo esc_url( $link_url ); ?>" target="<?php echo esc_attr( $link_target ); ?>" title="Learn more about <?php $link_title?> now" ><?php echo esc_html( $link_title ); ?></a><?php echo svg_icon('header__arrow', 'angle-right');?>
+						<div class="header__cta--wrapper"><a class="header__cta underline" href="<?php echo esc_url( $link_url ); ?>" target="<?php echo esc_attr( $link_target ); ?>"><?php echo esc_html( $link_title ); ?></a><?php echo svg_icon('header__arrow', 'angle-right');?>
 						</div>
 				<?php endif;
 
@@ -129,7 +141,7 @@
 						$link_title = $link['title'];
 						$link_target = $link['target'] ? $link['target'] : '_self';
 						?>
-						<div class="header__cta--wrapper"><a class="header__cta underline" href="<?php echo esc_url( $link_url ); ?>" target="<?php echo esc_attr( $link_target ); ?>" title="Learn more about <?php $link_title?> now" ><?php echo esc_html( $link_title ); ?></a><?php echo svg_icon('header__arrow', 'angle-right');?>
+						<div class="header__cta--wrapper"><a class="header__cta underline" href="<?php echo esc_url( $link_url ); ?>" target="<?php echo esc_attr( $link_target ); ?>"><?php echo esc_html( $link_title ); ?></a><?php echo svg_icon('header__arrow', 'angle-right');?>
 						</div>
 				<?php endif;
 
@@ -140,7 +152,7 @@
 						$link_title = $link['title'];
 						$link_target = $link['target'] ? $link['target'] : '_self';
 						?>
-						<div class="header__cta--wrapper"><a class="header__cta underline" href="<?php echo esc_url( $link_url ); ?>" target="<?php echo esc_attr( $link_target ); ?>" title="Learn more about <?php $link_title?> now" ><?php echo esc_html( $link_title ); ?></a><?php echo svg_icon('header__arrow', 'angle-right');?>
+						<div class="header__cta--wrapper"><a class="header__cta underline" href="<?php echo esc_url( $link_url ); ?>" target="<?php echo esc_attr( $link_target ); ?>"><?php echo esc_html( $link_title ); ?></a><?php echo svg_icon('header__arrow', 'angle-right');?>
 						</div>
 				<?php endif;
 				?>

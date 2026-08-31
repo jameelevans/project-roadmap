@@ -42,7 +42,6 @@ Text Domain: projectroadmaptta.com
 * * All variables for project can be found in this file
 *
 */
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap");
 :root {
   --color-blue: #07558c;
   --color-blue-a: 7, 85, 140;
@@ -139,9 +138,23 @@ Text Domain: projectroadmaptta.com
 /**
 *
 * * Everything that controls typography can be found in this file all in one place
-* TODO: Include custom downloaded font paths below --> Best for speed optimization
+* Open Sans is self-hosted so typography does not wait on a third-party stylesheet.
 *
 */
+@font-face {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("assets/fonts/open-sans-latin-variable.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Open Sans";
+  font-style: italic;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("assets/fonts/open-sans-latin-variable-italic.woff2") format("woff2");
+}
 .body-text {
   font-size: clamp(1.5rem, 1.8vw, 1.8rem);
 }
@@ -1134,6 +1147,7 @@ html a:focus:not(.screen-reader-shortcut):not(.backtop):not(.questions__email):n
 }
 .header__icon {
   width: 20rem;
+  height: auto;
 }
 @media only screen and (max-width: 50em) {
   .header__icon {
@@ -1705,6 +1719,13 @@ body:not(.home) .header__content {
 }
 .footer__link {
   color: inherit;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  min-height: 2.4rem;
   text-decoration: none;
   -webkit-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
@@ -2057,6 +2078,7 @@ body:not(.home) .header__content {
 .about__item img {
   /* Image styling */
   width: 100%;
+  height: auto;
   display: block;
   border-radius: 1.5rem;
   -webkit-transition: -webkit-transform 3.5s ease-in-out;
@@ -2301,6 +2323,7 @@ body:not(.home) .header__content {
 .staff__headshot {
   /* Headshot image styling */
   width: 19rem;
+  height: auto;
   position: relative;
   z-index: 2;
   -webkit-filter: grayscale(100%) brightness(115%);

@@ -1,9 +1,25 @@
 /**
 *
 * * Everything that controls typography can be found in this file all in one place
-* TODO: Include custom downloaded font paths below --> Best for speed optimization
+* Open Sans is self-hosted so typography does not wait on a third-party stylesheet.
 *
 */
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url('assets/fonts/open-sans-latin-variable.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: italic;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url('assets/fonts/open-sans-latin-variable-italic.woff2') format('woff2');
+}
 
 // * --------| Font variables |-------- *
 $font-primary: 'Open Sans', sans-serif;
@@ -24,7 +40,6 @@ $font-icon-body: 0.8rem;
   }
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
 /* Font mixins
 @mixin font-primary {
   font-family: $font-primary;

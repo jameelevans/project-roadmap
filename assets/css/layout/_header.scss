@@ -84,6 +84,7 @@
   /* Header icon */
   &__icon {
     width: 20rem;
+    height: auto;
 
     @include respond(medium) {
       z-index: 9999;

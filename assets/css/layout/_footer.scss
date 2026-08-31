@@ -102,6 +102,9 @@
   /* Footer links */
   &__link {
     color: inherit;
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.4rem;
     text-decoration: none;
     transition: all 0.3s ease-in-out;
 

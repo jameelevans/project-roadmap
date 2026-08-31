@@ -17,6 +17,12 @@ function taskComplete(message) {
   console.log(message);
 }
 
+// Reload only after a watched build has finished writing its output.
+function reloadBrowser(done) {
+  browserSync.reload();
+  done();
+}
+
 // Keep WordPress editor pages on Local's native origin. BrowserSync's proxy URL
 // rewriting can corrupt escaped block-editor bootstrap data inside admin HTML.
 function redirectWordPressAdmin(req, res, next) {
@@ -114,14 +120,16 @@ gulp.task('watch', () => {
     open: 'local',
   });
 
-  gulp.watch(settings.watchPhp, (done) => {
-    browserSync.reload();
-    done();
-  });
-  gulp.watch(settings.watchStyles, gulp.series('styles')).on('change', browserSync.reload);
-  gulp.watch([settings.watchJsModules, settings.watchJsMain], gulp.series('clean-scripts', 'scripts')).on('change', browserSync.reload);
+  gulp.watch(settings.watchPhp, reloadBrowser);
+  gulp.watch(settings.watchStyles, gulp.series('styles', reloadBrowser));
+  gulp.watch(
+    [settings.watchJsModules, settings.watchJsMain],
+    gulp.series('clean-scripts', 'scripts', reloadBrowser)
+  );
   // Image files in this Local/iCloud setup can emit repeated change events.
   // Run `npm run images` manually when image optimization is needed.
 });
 
+// Build current assets before starting the persistent Local development server.
+gulp.task('dev', gulp.series('styles', 'clean-scripts', 'scripts', 'watch'));
 gulp.task('default', gulp.series('styles', 'clean-scripts', 'scripts', 'images', 'svg', 'watch'));

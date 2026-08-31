@@ -160,6 +160,7 @@
     img {
       /* Image styling */
       width: 100%;
+      height: auto;
       display: block;
       border-radius: 1.5rem;
       transition: transform 3.5s ease-in-out;
@@ -427,6 +428,7 @@
   &__headshot {
     /* Headshot image styling */
     width: 19rem;
+    height: auto;
     position: relative;
     z-index: 2;
     filter: grayscale(100%) brightness(115%);

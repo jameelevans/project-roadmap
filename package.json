@@ -1,11 +1,11 @@
 {
-  "name": "your-wp-project",
-  "description": "A WPGulp based project",
+  "name": "project-roadmap",
+  "description": "WordPress theme for Project Roadmap",
   "version": "1.0.0",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jameelevans/wp-sass-starter.git"
+    "url": "git+https://github.com/jameelevans/project-roadmap.git"
   },
   "license": "ISC",
   "devDependencies": {
@@ -48,11 +48,15 @@
     "webpack-cli": "^5.1.4"
   },
   "scripts": {
-    "gulpwatch": "gulp watch",
+    "dev": "gulp dev",
+    "gulpwatch": "gulp dev",
+    "gulpwatch:sync": "gulp dev",
     "gulpstyles": "gulp styles",
     "gulpscripts": "gulp scripts",
     "images": "gulp images",
-    "clearCache": "gulp clearCache"
+    "clearCache": "gulp clearCache",
+    "deploy:staging:check": "bash scripts/deploy-staging.sh",
+    "deploy:staging": "bash scripts/deploy-staging.sh --deploy"
   },
   "dependencies": {
     "cacheable-request": "^12.0.1",
