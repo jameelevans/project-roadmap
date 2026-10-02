@@ -1,0 +1,55 @@
+.content-page {
+  background-color: var(--color-white);
+  padding: 8rem 8vw;
+
+  &__inner {
+    margin-inline: auto;
+    max-width: 100rem;
+  }
+
+  &__article {
+    padding-block: 4rem;
+
+    & + & {
+      border-top: .1rem solid var(--color-silver);
+    }
+  }
+
+  &__title {
+    font-size: 3rem;
+    margin-block-end: 2rem;
+
+    a {
+      color: var(--color-dark-blue);
+    }
+  }
+
+  &__content {
+    font-size: 1.8rem;
+    line-height: 1.7;
+  }
+
+  &__meta {
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 1.5rem;
+    gap: 1rem 2rem;
+    margin-block-start: 2.5rem;
+  }
+
+  &__action {
+    background-color: var(--color-resource-accent);
+    color: var(--color-white);
+    display: inline-block;
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-block-start: 2.5rem;
+    padding: 1.2rem 2rem;
+    text-decoration: none;
+  }
+
+  &__empty {
+    padding-block: 6rem;
+    text-align: center;
+  }
+}

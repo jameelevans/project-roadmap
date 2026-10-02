@@ -11,16 +11,12 @@ get_header();?>
 			<section class="about__header" aria-labelledby="about-heading">
 				<h2 class="h2__heading" id="about-heading">About</h2>
 				<p class="body-text">Project Roadmap delivers Training and Technical Assistance (TTA) exclusively to <b>OVC Enhanced Collaborative Model (ECM) grantees and their partners</b>, designed to meet the needs of individual grantees and ECM task forces as multi-disciplinary teams.</p>
-			</section>
-			<section class="about__header page-section" id="resources-link" aria-labelledby="home-resources-heading" data-matching-link="#resources-nav-link">
-				<h2 class="h2__heading" id="home-resources-heading">Resources</h2>
-				<p class="body-text">Tools, guides, and templates for ECM task forces. Search, filter by type, or browse the full library below.</p>
-				<?php // Follow the published Resources page even if its permalink changes. ?>
 				<a class="body-cta" href="<?php echo esc_url( projectroadmap_resources_url() ); ?>">
 					<span>Explore Resources</span>
 					<?php svg_icon( 'body-cta__arrow', 'angle-right' ); ?>
 				</a>
 			</section>
+
 
 			<section class="strategy page-section" id="strategy" aria-labelledby="strategy-heading" data-matching-link="#strategy-link">
 				<header class="strategy__header">
@@ -31,7 +27,7 @@ get_header();?>
 				<div class="about__wrapper">
 				<article class="about__item" id="task-force">
 					<div class="about__gradient">
-						<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/img/backgrounds/task-force.jpg' ); ?>" alt="Investigators reviewing case information together" width="1000" height="667" loading="lazy" decoding="async">
+						<?php projectroadmap_theme_picture( 'task-force', 'Investigators reviewing case information together' ); ?>
 					</div>
 					<div class="about__details">
 						<h3 class="h3__heading">Task Force</h3>
@@ -40,7 +36,7 @@ get_header();?>
 				</article>
 				<article class="about__item" id="discipline">
 					<div class="about__gradient">
-						<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/img/backgrounds/discipline.jpg' ); ?>" alt="Presenter leading a professional workshop" width="1000" height="667" loading="lazy" decoding="async">
+						<?php projectroadmap_theme_picture( 'discipline', 'Presenter leading a professional workshop' ); ?>
 					</div>
 					<div class="about__details">
 						<h3 class="h3__heading">Discipline</h3>
@@ -49,7 +45,7 @@ get_header();?>
 				</article>
 				<article class="about__item" id="field-at-large">
 					<div class="about__gradient">
-						<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/img/backgrounds/field-at-large.jpg' ); ?>" alt="Workshop participants raising their hands" width="1000" height="667" loading="lazy" decoding="async">
+						<?php projectroadmap_theme_picture( 'field-at-large', 'Workshop participants raising their hands' ); ?>
 					</div>
 					<div class="about__details">
 						<h3 class="h3__heading">Field At-Large</h3>
@@ -93,6 +89,7 @@ get_header();?>
 											'alt'      => get_the_title(),
 											'loading'  => 'lazy',
 											'decoding' => 'async',
+											'sizes'    => '190px',
 										)
 									);
 									?>
@@ -129,10 +126,11 @@ get_header();?>
 									get_the_ID(),
 									'staff-headshot',
 									array(
-										'class'    => 'staff__headshot',
-										'alt'      => get_the_title(),
-										'loading'  => 'lazy',
-										'decoding' => 'async',
+									'class'    => 'staff__headshot',
+									'alt'      => get_the_title(),
+									'loading'  => 'lazy',
+									'decoding' => 'async',
+									'sizes'    => '190px',
 									)
 								);
 								?>

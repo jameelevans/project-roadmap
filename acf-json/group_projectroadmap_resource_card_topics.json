@@ -1,0 +1,73 @@
+{
+    "key": "group_projectroadmap_resource_card_topics",
+    "title": "Resource Card Topics",
+    "fields": [
+        {
+            "key": "field_projectroadmap_resource_display_topic_1",
+            "label": "First Topic",
+            "name": "resource_display_topic_1",
+            "type": "taxonomy",
+            "instructions": "Select the first Topic to show on the card. Saving also adds it to this Resource's Topic tags.",
+            "required": 0,
+            "taxonomy": "post_tag",
+            "field_type": "select",
+            "allow_null": 1,
+            "add_term": 0,
+            "save_terms": 0,
+            "load_terms": 0,
+            "return_format": "id",
+            "multiple": 0
+        },
+        {
+            "key": "field_projectroadmap_resource_display_topic_2",
+            "label": "Second Topic",
+            "name": "resource_display_topic_2",
+            "type": "taxonomy",
+            "instructions": "Optional. Leave blank to fill the card with another assigned Topic.",
+            "required": 0,
+            "taxonomy": "post_tag",
+            "field_type": "select",
+            "allow_null": 1,
+            "add_term": 0,
+            "save_terms": 0,
+            "load_terms": 0,
+            "return_format": "id",
+            "multiple": 0
+        },
+        {
+            "key": "field_projectroadmap_resource_display_topic_3",
+            "label": "Third Topic",
+            "name": "resource_display_topic_3",
+            "type": "taxonomy",
+            "instructions": "Optional. Leave blank to fill the card with another assigned Topic.",
+            "required": 0,
+            "taxonomy": "post_tag",
+            "field_type": "select",
+            "allow_null": 1,
+            "add_term": 0,
+            "save_terms": 0,
+            "load_terms": 0,
+            "return_format": "id",
+            "multiple": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 2,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Choose up to three Topics in display order. Selected Topics are added to the Resource's tags; all assigned Topics remain searchable and filterable.",
+    "show_in_rest": 1,
+    "modified": 1790900000
+}

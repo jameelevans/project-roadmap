@@ -7,16 +7,24 @@
 ?>
 	<?php
 	$header_image = get_stylesheet_directory_uri() . '/assets/img/backgrounds/header-bg.webp';
+	$header_image_mobile = get_stylesheet_directory_uri() . '/assets/img/backgrounds/header-bg-mobile.webp';
 
 	if ( is_page( 'resources' ) ) {
 		$header_image = get_stylesheet_directory_uri() . '/assets/img/backgrounds/resources-hero.webp';
+		$header_image_mobile = get_stylesheet_directory_uri() . '/assets/img/backgrounds/resources-hero-mobile.webp';
 	}
 
 	if ( isset( $post->ID ) && has_post_thumbnail( $post->ID ) ) {
-		$image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'full' );
+		// Use a generated page-banner derivative instead of downloading the full upload.
+		$image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'pageBanner' );
 
 		if ( ! empty( $image[0] ) ) {
 			$header_image = $image[0];
+		}
+
+		$mobile_image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'medium_large' );
+		if ( ! empty( $mobile_image[0] ) ) {
+			$header_image_mobile = $mobile_image[0];
 		}
 	}
 	?>
@@ -26,10 +34,11 @@
 	<head>
 		<meta charset="<?php bloginfo( 'charset' ); ?>">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<meta name="theme-color" content="#002239">
 		<link rel="profile" href="https://gmpg.org/xfn/11">
 		<link rel="preload" href="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/fonts/open-sans-latin-variable.woff2' ); ?>" as="font" type="font/woff2" crossorigin>
-		<link rel="preload" href="<?php echo esc_url( $header_image ); ?>" as="image" fetchpriority="high">
+		<link rel="preload" href="<?php echo esc_url( $header_image ); ?>" as="image"<?php echo 'webp' === pathinfo( (string) wp_parse_url( $header_image, PHP_URL_PATH ), PATHINFO_EXTENSION ) ? ' type="image/webp"' : ''; ?> media="(min-width: 801px)" fetchpriority="high">
+		<link rel="preload" href="<?php echo esc_url( $header_image_mobile ); ?>" as="image"<?php echo 'webp' === pathinfo( (string) wp_parse_url( $header_image_mobile, PHP_URL_PATH ), PATHINFO_EXTENSION ) ? ' type="image/webp"' : ''; ?> media="(max-width: 800px)" fetchpriority="high">
 		<?php wp_head(); ?>
 
 	<style>
@@ -44,7 +53,7 @@
 				.general-header{
 				background-image: linear-gradient(to bottom,
 				rgba(var(--color-dark-blue-a), .95), rgba(var(--color-blue-a), 0.95)),
-				url("<?php echo esc_url( $header_image ); ?>");
+				url("<?php echo esc_url( $header_image_mobile ); ?>");
 			}
 		}
 
@@ -90,15 +99,24 @@
 			</div>
 
 			<div class="header__content">
-				<h1 class="header__heading"><?php
-							if(is_front_page()){
-								echo get_bloginfo( 'description' );
-							}else if (is_404()) {
-								echo '404 Error';
-							} else {
-							echo get_the_title();
-							}
-						?>
+				<h1 class="header__heading">
+					<?php
+					if ( is_front_page() ) {
+						$header_title = get_bloginfo( 'description' );
+					} elseif ( is_404() ) {
+						$header_title = __( '404 Error', 'projectroadmaptta.com' );
+					} elseif ( is_search() ) {
+						$header_title = sprintf( __( 'Search results for %s', 'projectroadmaptta.com' ), get_search_query() );
+					} elseif ( is_archive() ) {
+						$header_title = get_the_archive_title();
+					} elseif ( is_home() ) {
+						$header_title = single_post_title( '', false );
+					} else {
+						$header_title = get_the_title();
+					}
+
+					echo esc_html( wp_strip_all_tags( $header_title ) );
+					?>
 				</h1>
 
 				<div class="header__description">
@@ -106,7 +124,7 @@
 						if (is_front_page()) {
 							the_content();
 						} else if (is_page( 'resources' )) {
-							echo 'Tools, guides, and downloadable resources for ECM task forces.';
+							esc_html_e( 'Tools, guides, and downloadable resources for ECM task forces.', 'projectroadmaptta.com' );
 						} else if (is_404()) {
 							echo 'Sorry You may be lost!';
 						} 

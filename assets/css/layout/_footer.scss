@@ -112,6 +112,16 @@
     &:focus {
       color: var(--color-blue);
     }
+
+    &--button {
+      appearance: none;
+      background: transparent;
+      border: 0;
+      cursor: pointer;
+      font: inherit;
+      padding: 0;
+      text-align: left;
+    }
   }
 
   /* Footer social icons */

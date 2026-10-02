@@ -1,4 +1,4 @@
-/*
+/*!
 Theme Name: Project Roadmap
 Description: This theme was designed by Laura Myers, Eduardo Minaya and Randy Grubba and developed by Jameel Evans.
 Version: 1.0
@@ -76,6 +76,8 @@ Text Domain: projectroadmaptta.com
 //  * Resource cards
 @import "components/resource-card";
 
+// Consent banner styles remain in components/_consent-banner.scss for future use.
+
 //*--------| Layouts |--------*//
 // *Header
 @import "layout/header";
@@ -101,3 +103,6 @@ Text Domain: projectroadmaptta.com
 
 //* Resources page
 @import "pages/resources-page";
+
+//* Generic WordPress content and archive pages
+@import "pages/content-page";

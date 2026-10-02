@@ -16,11 +16,16 @@ $resource_query = new WP_Query(
     'post_type'      => 'post',
     'post_status'    => 'publish',
     'posts_per_page' => -1,
-    'orderby'        => 'title',
-    'order'          => 'ASC',
+    'orderby'        => 'date',
+    'order'          => 'DESC',
     'meta_query'     => array(
+      'relation' => 'OR',
       array(
         'key'     => 'download_pdf',
+        'compare' => 'EXISTS',
+      ),
+      array(
+        'key'     => 'youtube_video_url',
         'compare' => 'EXISTS',
       ),
     ),
@@ -33,6 +38,24 @@ $topic_totals = array();
 $resources_per_page = 9;
 $featured_total = 0;
 $resource_type_slugs = projectroadmap_resource_type_slugs();
+$all_topics = get_terms(
+  array(
+    'taxonomy'   => 'post_tag',
+    'hide_empty' => false,
+    'orderby'    => 'name',
+    'order'      => 'ASC',
+  )
+);
+
+// Keep every admin-managed Topic available, including terms awaiting assignment.
+if ( ! is_wp_error( $all_topics ) ) {
+  foreach ( $all_topics as $topic ) {
+    $topic_totals[ $topic->slug ] = array(
+      'name'  => $topic->name,
+      'count' => 0,
+    );
+  }
+}
 
 if ( $resource_query->have_posts() ) {
   while ( $resource_query->have_posts() ) {
@@ -49,9 +72,8 @@ if ( $resource_query->have_posts() ) {
       $pdf_url = $pdf;
     }
 
-    if ( empty( $pdf_url ) ) {
-      continue;
-    }
+    $youtube_value = function_exists( 'get_field' ) ? get_field( 'youtube_video_url' ) : get_post_meta( get_the_ID(), 'youtube_video_url', true );
+    $youtube_url = projectroadmap_sanitize_youtube_url( $youtube_value );
 
     $categories = get_the_category();
     $resource_categories = array_values(
@@ -79,18 +101,19 @@ if ( $resource_query->have_posts() ) {
     $primary_type = ! empty( $type_terms ) ? $type_terms[0] : null;
     $type_slug = $primary_type ? $primary_type->slug : 'resource';
     $type_name = projectroadmap_resource_type_label( $type_slug, $primary_type ? $primary_type->name : __( 'Resource', 'projectroadmaptta.com' ) );
-    $tags = get_the_tags();
-    $topic_pills = $tags ? $tags : array();
-    $topics_by_slug = array();
-    $is_featured = (bool) get_post_meta( get_the_ID(), '_projectroadmap_featured_resource', true );
-    $search_parts = array( get_the_title(), get_the_excerpt(), $type_name );
+    $is_video = in_array( $type_slug, array( 'fireside-chat', 'fireside-chats' ), true ) && ! empty( $youtube_url );
+    $resource_url = $is_video ? $youtube_url : $pdf_url;
 
-    // Categories and tags are both searchable in the Topic dropdown.
-    foreach ( array_merge( $resource_categories, $topic_pills ) as $topic ) {
-      $topics_by_slug[ $topic->slug ] = $topic;
+    // Video-only Fireside Chats are valid; every other resource requires a PDF.
+    if ( empty( $resource_url ) ) {
+      continue;
     }
 
-    $topics = array_values( $topics_by_slug );
+    // WordPress tags are managed as Topics in the Resources admin screens.
+    $tags = get_the_tags();
+    $topics = $tags ? array_values( $tags ) : array();
+    $is_featured = (bool) get_post_meta( get_the_ID(), '_projectroadmap_featured_resource', true );
+    $search_parts = array( get_the_title(), get_the_excerpt(), $type_name );
 
     if ( $is_featured ) {
       $featured_total++;
@@ -117,15 +140,17 @@ if ( $resource_query->have_posts() ) {
       'id'        => get_the_ID(),
       'title'     => get_the_title(),
       'excerpt'   => get_the_excerpt(),
-      'url'       => $pdf_url,
+      'url'       => $resource_url,
       'date'      => get_the_date( 'Y-m-d' ),
+      'sortDate'  => get_post_time( 'Y-m-d H:i:s', false ),
       'dateLabel' => get_the_date( 'M Y' ),
       'type'      => $type_name,
       'typeSlug'  => $type_slug,
       'types'     => wp_list_pluck( $type_terms, 'slug' ),
       'topics'    => $topics,
-      'topicPills'=> $topic_pills,
+      'displayTopics' => projectroadmap_resource_display_topics( get_the_ID(), $topics ),
       'featured'  => $is_featured,
+      'isVideo'   => $is_video,
       'search'    => strtolower( implode( ' ', $search_parts ) ),
     );
   }
@@ -133,7 +158,7 @@ if ( $resource_query->have_posts() ) {
   wp_reset_postdata();
 }
 
-// Featured resources lead every initial result set; titles break ties.
+// Featured resources lead; within each group, newest published posts come first.
 usort(
   $resources,
   function( $resource_a, $resource_b ) {
@@ -141,7 +166,9 @@ usort(
       return $resource_a['featured'] ? -1 : 1;
     }
 
-    return strcasecmp( $resource_a['title'], $resource_b['title'] );
+    $date_comparison = strcmp( $resource_b['sortDate'], $resource_a['sortDate'] );
+
+    return $date_comparison ?: strcasecmp( $resource_a['title'], $resource_b['title'] );
   }
 );
 
@@ -157,6 +184,45 @@ uasort(
   function( $a, $b ) {
     return strcasecmp( $a['name'], $b['name'] );
   }
+);
+
+// Mirror the visible resource collection in machine-readable structured data.
+$resource_schema_items = array();
+foreach ( $resources as $position => $resource ) {
+  $topic_names = wp_list_pluck( $resource['topics'], 'name' );
+  $schema_resource = array(
+    '@type'          => 'CreativeWork',
+    '@id'            => $resource['url'],
+    'url'            => $resource['url'],
+    'name'           => $resource['title'],
+    'datePublished'  => $resource['date'],
+    'encodingFormat' => $resource['isVideo'] ? 'video/youtube' : 'application/pdf',
+    'isAccessibleForFree' => true,
+  );
+
+  if ( ! empty( $resource['excerpt'] ) ) {
+    $schema_resource['description'] = wp_strip_all_tags( $resource['excerpt'] );
+  }
+
+  if ( ! empty( $topic_names ) ) {
+    $schema_resource['keywords'] = implode( ', ', $topic_names );
+  }
+
+  $resource_schema_items[] = array(
+    '@type'    => 'ListItem',
+    'position' => $position + 1,
+    'item'     => $schema_resource,
+  );
+}
+
+$resource_collection_schema = array(
+  '@context'        => 'https://schema.org',
+  '@type'           => 'ItemList',
+  '@id'             => projectroadmap_resources_url() . '#resource-list',
+  'name'            => __( 'Project Roadmap Resources', 'projectroadmaptta.com' ),
+  'numberOfItems'   => count( $resource_schema_items ),
+  'itemListOrder'   => 'https://schema.org/ItemListUnordered',
+  'itemListElement' => $resource_schema_items,
 );
 
 $initial_visible_end = min( $resources_per_page, count( $resources ) );
@@ -222,8 +288,8 @@ $initial_count_label = count( $resources ) > 0
           <div class="resources-filter__control">
             <label class="resources-filter__label" for="resources-sort"><?php esc_html_e( 'Sort by', 'projectroadmaptta.com' ); ?></label>
             <select class="resources-filter__select" id="resources-sort" data-resource-sort>
-              <option value="az"><?php esc_html_e( 'A to Z', 'projectroadmaptta.com' ); ?></option>
               <option value="newest"><?php esc_html_e( 'Newest first', 'projectroadmaptta.com' ); ?></option>
+              <option value="az"><?php esc_html_e( 'A to Z', 'projectroadmaptta.com' ); ?></option>
               <option value="type"><?php esc_html_e( 'By type', 'projectroadmaptta.com' ); ?></option>
             </select>
           </div>
@@ -262,7 +328,7 @@ $initial_count_label = count( $resources ) > 0
         <?php foreach ( $resources as $resource ) : ?>
           <?php
           $topic_slugs = wp_list_pluck( $resource['topics'], 'slug' );
-          $topic_names = wp_list_pluck( $resource['topicPills'], 'name' );
+          $display_topic_names = wp_list_pluck( $resource['displayTopics'], 'name' );
           ?>
           <article
             class="resource-card resource-card--<?php echo esc_attr( $resource['typeSlug'] ); ?><?php echo $resource['featured'] ? ' resource-card--featured' : ''; ?>"
@@ -271,12 +337,12 @@ $initial_count_label = count( $resources ) > 0
             data-resource-search="<?php echo esc_attr( $resource['search'] ); ?>"
             data-resource-types="<?php echo esc_attr( implode( ' ', $resource['types'] ) ); ?>"
             data-resource-topics="<?php echo esc_attr( implode( ' ', $topic_slugs ) ); ?>"
-            data-resource-date="<?php echo esc_attr( $resource['date'] ); ?>"
+            data-resource-date="<?php echo esc_attr( $resource['sortDate'] ); ?>"
             data-resource-featured="<?php echo $resource['featured'] ? 'true' : 'false'; ?>"
             data-resource-sort-title="<?php echo esc_attr( strtolower( $resource['title'] ) ); ?>"
             data-resource-sort-type="<?php echo esc_attr( $resource['typeSlug'] ); ?>"
           >
-            <a class="resource-card__link" href="<?php echo esc_url( $resource['url'] ); ?>" target="_blank" rel="noopener" download>
+            <a class="resource-card__link" href="<?php echo esc_url( $resource['url'] ); ?>" target="_blank" rel="noopener"<?php if ( ! $resource['isVideo'] ) : ?> download<?php endif; ?>>
               <?php if ( $resource['featured'] ) : ?>
                 <span class="resource-card__featured"><?php esc_html_e( 'Featured Resource', 'projectroadmaptta.com' ); ?></span>
               <?php endif; ?>
@@ -284,9 +350,9 @@ $initial_count_label = count( $resources ) > 0
               <span class="resource-card__content">
                 <span class="resource-card__type"><?php echo esc_html( $resource['type'] ); ?></span>
                 <h3 class="resource-card__title"><?php echo esc_html( $resource['title'] ); ?></h3>
-                <?php if ( ! empty( $topic_names ) ) : ?>
+                <?php if ( ! empty( $display_topic_names ) ) : ?>
                   <span class="resource-card__topics" aria-label="<?php esc_attr_e( 'Resource topics', 'projectroadmaptta.com' ); ?>">
-                    <?php foreach ( $topic_names as $topic_name ) : ?>
+                    <?php foreach ( $display_topic_names as $topic_name ) : ?>
                       <span class="resource-card__topic-pill"><?php echo esc_html( $topic_name ); ?></span>
                     <?php endforeach; ?>
                   </span>
@@ -294,7 +360,13 @@ $initial_count_label = count( $resources ) > 0
               </span>
               <span class="resource-card__footer">
                 <span class="resource-card__date"><?php echo esc_html( $resource['dateLabel'] ); ?></span>
-                <span class="resource-card__action"><?php svg_icon( 'resource-card__download-icon', 'download' ); ?><?php esc_html_e( 'Download', 'projectroadmaptta.com' ); ?></span>
+                <span class="resource-card__action">
+                  <?php if ( $resource['isVideo'] ) : ?>
+                    <?php svg_icon( 'resource-card__action-icon', 'video' ); ?><?php esc_html_e( 'Watch Now', 'projectroadmaptta.com' ); ?>
+                  <?php else : ?>
+                    <?php svg_icon( 'resource-card__action-icon', 'download' ); ?><?php esc_html_e( 'Download', 'projectroadmaptta.com' ); ?>
+                  <?php endif; ?>
+                </span>
               </span>
             </a>
           </article>
@@ -320,6 +392,7 @@ $initial_count_label = count( $resources ) > 0
       </nav>
     </div>
   </section>
+  <script type="application/ld+json"><?php echo wp_json_encode( $resource_collection_schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ); ?></script>
 </main>
 
 <?php get_footer(); ?>

@@ -52,6 +52,7 @@ rsync \
   --chmod='Du=rwx,Dgo=rx,Fu=rw,Fgo=r' \
   --exclude='.DS_Store' \
   --exclude='assets/img/raw/' \
+  ./.htaccess \
   ./404.php \
   ./footer.php \
   ./front-page.php \
@@ -61,9 +62,11 @@ rsync \
   ./page-resources.php \
   ./style.css \
   ./screenshot.png \
+  ./acf-json/ \
   ./assets/fonts/ \
   ./assets/img/ \
   ./assets/js/scripts-bundled.js \
+  ./template-parts/ \
   "${REMOTE_HOST}:${REMOTE_THEME}"
 
 if [[ "${1:-}" == "--deploy" ]]; then

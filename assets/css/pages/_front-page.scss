@@ -230,6 +230,10 @@
       }
     }
   }
+
+  &__picture {
+    display: block;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -252,7 +256,7 @@
       rgba(var(--color-grey-a), 0.8),
       rgba(var(--color-grey-a), 0)
     ),
-    url('assets/img/backgrounds/staff-bg.jpg');
+    url('assets/img/backgrounds/staff-bg.webp');
   background-size: cover;
   background-attachment: fixed;
   background-position: bottom;
@@ -314,6 +318,8 @@
   // Member wrapper and link
   &__member {
     /* Member styling */
+    contain-intrinsic-size: 19rem 24rem;
+    content-visibility: auto;
     position: relative;
     width: 19rem;
     margin: 3.5rem;

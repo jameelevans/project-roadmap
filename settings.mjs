@@ -8,7 +8,7 @@ const settings = {
     styleSRC: './assets/css/style.scss', // Path to main .scss file 
     styleMain: './style.css', // Path to main .scss file
     styleDestination: './', // Path to place the compiled CSS file. Default set to root folder
-    outputStyle: 'expanded', // Expanded so that our CSS is readable to wordpress
+    outputStyle: 'compressed', // SCSS remains readable; browsers receive the smallest production CSS.
     precision: 10,
   
     // JS options

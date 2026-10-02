@@ -1,6 +1,7 @@
 class BackTop {
   constructor() {
     this.backTopBtn = document.querySelector(".backtop");
+    this.scrollFrame = null;
 
     if (!this.backTopBtn) {
       return;
@@ -21,12 +22,15 @@ class BackTop {
 
   addScrollListener() {
     window.addEventListener("scroll", () => {
-      if (window.scrollY > 100) { // Show the button when user scrolls down a certain amount
-        this.backTopBtn.classList.add("backtop--is-visible");
-      } else {
-        this.backTopBtn.classList.remove("backtop--is-visible");
+      if (this.scrollFrame) {
+        return;
       }
-    });
+
+      this.scrollFrame = window.requestAnimationFrame(() => {
+        this.backTopBtn.classList.toggle("backtop--is-visible", window.scrollY > 100);
+        this.scrollFrame = null;
+      });
+    }, { passive: true });
   }
 }
 

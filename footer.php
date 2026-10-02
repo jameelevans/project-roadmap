@@ -53,6 +53,7 @@
             <p class="footer__award-info">This website was produced by ICF under 2020-VT-BX-K003, awarded by the Office for Victims of Crime, Office of Justice Programs, U.S. Department of Justice. The opinions, findings, and conclusions or recommendations expressed in this website are those of the contributors and do not necessarily represent the official position or policies of the U.S. Department of Justice.</p>
         </div>  
     </footer>
+    <?php // Analytics and its consent UI are paused; the template is retained for later use. ?>
     <a class="backtop" href="#top"><span class="sr-only">Back to top</span> <?php echo svg_icon('backtop__icon', 'angle-up');?></a>
     <?php wp_footer(); ?>
 </body>

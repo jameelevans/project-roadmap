@@ -48,7 +48,7 @@
   &__grid {
     display: grid;
     gap: 1.6rem;
-    grid-template-columns: repeat(auto-fill, minmax(32rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 32rem), 1fr));
 
     @include respond(medium) {
       grid-template-columns: 1fr;
@@ -99,6 +99,11 @@
   gap: 1.2rem;
   justify-content: center;
   margin-block-start: 3.2rem;
+
+  // Flex must not override the filter's hidden state for a single results page.
+  &[hidden] {
+    display: none;
+  }
 
   &__button {
     align-items: center;

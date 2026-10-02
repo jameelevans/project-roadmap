@@ -30,7 +30,7 @@ class ResourceFilter {
     this.activeTopics = new Set();
     this.currentPage = 1;
     this.perPage = 9;
-    this.sortMode = "az";
+    this.sortMode = this.sortSelect ? this.sortSelect.value : "newest";
     // Keeps the "By type" sort consistent with the design mockup.
     this.typeOrder = {
       "tools-checklists": 1,
@@ -38,7 +38,8 @@ class ResourceFilter {
       "guide": 2,
       "quick-guide": 3,
       "window": 4,
-      "fireside-chat": 5
+      "fireside-chat": 5,
+      "fireside-chats": 5
     };
 
     this.page.classList.add("resources-page--enhanced");
@@ -175,7 +176,10 @@ class ResourceFilter {
       }
 
       if (this.sortMode === "newest") {
-        return (cardB.dataset.resourceDate || "").localeCompare(cardA.dataset.resourceDate || "");
+        const dateOrder = (cardB.dataset.resourceDate || "").localeCompare(cardA.dataset.resourceDate || "");
+        if (dateOrder !== 0) {
+          return dateOrder;
+        }
       }
 
       if (this.sortMode === "type") {

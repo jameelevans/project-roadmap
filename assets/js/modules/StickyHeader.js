@@ -1,25 +1,37 @@
-import throttle from 'lodash/throttle'
-import debounce from 'lodash/debounce'
-
 class StickyHeader {
   constructor() {
     this.siteHeader = document.querySelector(".header__top")
     this.pageSections = document.querySelectorAll(".page-section")
     this.browserHeight = window.innerHeight
-    this.previousScrollY = window.scrollY
+    this.scrollFrame = null
+    this.resizeTimer = null
     this.events()
+    this.runOnScroll()
   }
 
   events() {
-    window.addEventListener("scroll", throttle(() => this.runOnScroll(), 200))
-    window.addEventListener("resize", debounce(() => {
-      this.browserHeight = window.innerHeight
-    }, 333))
+    window.addEventListener("scroll", () => this.queueScrollUpdate(), { passive: true })
+    window.addEventListener("resize", () => {
+      window.clearTimeout(this.resizeTimer)
+      this.resizeTimer = window.setTimeout(() => {
+        this.browserHeight = window.innerHeight
+        this.runOnScroll()
+      }, 200)
+    }, { passive: true })
+  }
+
+  queueScrollUpdate() {
+    if (this.scrollFrame) {
+      return
+    }
+
+    this.scrollFrame = window.requestAnimationFrame(() => {
+      this.runOnScroll()
+      this.scrollFrame = null
+    })
   }
 
   runOnScroll() {
-    this.determineScrollDirection()
-
     if (!this.siteHeader) {
       return
     }
@@ -31,15 +43,6 @@ class StickyHeader {
     }
 
     this.pageSections.forEach(el => this.calcSection(el))
-  }
-
-  determineScrollDirection() {
-    if (window.scrollY > this.previousScrollY) {
-      this.scrollDirection = 'down'
-    } else {
-      this.scrollDirection = 'up'
-    }
-    this.previousScrollY = window.scrollY
   }
 
   calcSection(el) {

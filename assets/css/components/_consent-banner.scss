@@ -1,0 +1,182 @@
+/**
+ * Analytics consent banner.
+ *
+ * The banner uses the established Project Roadmap palette and remains a
+ * full-width utility surface instead of competing with page content.
+ */
+.consent-banner {
+  background-color: var(--color-dark-blue);
+  border-top: 0.4rem solid var(--color-teal);
+  bottom: 0;
+  box-shadow: 0 -0.8rem 2.4rem rgba(var(--color-dark-blue-a), 0.22);
+  color: var(--color-white);
+  left: 0;
+  opacity: 0;
+  position: fixed;
+  right: 0;
+  transform: translateY(100%);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  z-index: 10000;
+
+  &[hidden] {
+    display: none;
+  }
+
+  &--is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  &__inner {
+    align-items: center;
+    display: grid;
+    gap: 3rem;
+    grid-template-columns: minmax(0, 1fr) auto;
+    margin: 0 auto;
+    max-width: 120rem;
+    padding: 2.4rem 4rem;
+    position: relative;
+
+    @include respond(medium) {
+      align-items: start;
+      gap: 2rem;
+      grid-template-columns: minmax(0, 1fr);
+      padding: 2.4rem 3rem;
+    }
+
+    @include respond(small) {
+      padding: 2rem;
+    }
+  }
+
+  &__content {
+    max-width: 74rem;
+    padding-right: 4.5rem;
+  }
+
+  &__eyebrow {
+    color: var(--color-light-blue);
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem;
+    text-transform: uppercase;
+  }
+
+  &__title {
+    color: var(--color-white);
+    font-size: 2.4rem;
+    line-height: 1.25;
+    margin: 0 0 0.8rem;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &__description {
+    color: var(--color-white);
+    font-size: 1.6rem;
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  &__link {
+    color: var(--color-light-blue);
+    display: inline-block;
+    font-weight: 700;
+    margin-left: 0.5rem;
+    text-underline-offset: 0.3rem;
+
+    &:hover,
+    &:focus-visible {
+      color: var(--color-white);
+    }
+
+    &:focus-visible {
+      outline: 0.2rem solid var(--color-light-blue);
+      outline-offset: 0.3rem;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    gap: 1.2rem;
+    padding-right: 3rem;
+
+    @include respond(small) {
+      flex-direction: column;
+      padding-right: 0;
+      width: 100%;
+    }
+  }
+
+  &__dismiss {
+    align-items: center;
+    background: transparent;
+    border: 0;
+    color: var(--color-white);
+    cursor: pointer;
+    display: flex;
+    font-family: inherit;
+    font-size: 3rem;
+    height: 4.4rem;
+    justify-content: center;
+    line-height: 1;
+    padding: 0;
+    position: absolute;
+    right: 1.2rem;
+    top: 1.2rem;
+    transition: color 0.25s ease;
+    width: 4.4rem;
+
+    &:hover,
+    &:focus-visible {
+      color: var(--color-light-blue);
+    }
+
+    &:focus-visible {
+      outline: 0.3rem solid var(--color-light-blue);
+      outline-offset: 0.2rem;
+    }
+  }
+
+  &__button {
+    border: 0.2rem solid transparent;
+    border-radius: 0.4rem;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 1.6rem;
+    font-weight: 700;
+    min-height: 4.8rem;
+    min-width: 17rem;
+    padding: 1.2rem 1.8rem;
+    transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+
+    @include respond(small) {
+      min-width: 0;
+      width: 100%;
+    }
+
+    &:focus-visible {
+      outline: 0.3rem solid var(--color-light-blue);
+      outline-offset: 0.3rem;
+    }
+
+    &--accept {
+      background-color: var(--color-teal);
+      border-color: var(--color-teal);
+      color: var(--color-dark-blue);
+
+      &:hover {
+        background-color: var(--color-white);
+        border-color: var(--color-white);
+      }
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .consent-banner {
+    transition: none;
+  }
+}

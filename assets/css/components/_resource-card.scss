@@ -2,6 +2,9 @@
   --resource-card-icon-bg: var(--color-resource-guide-bg);
   --resource-card-icon-bg-hover: var(--color-resource-guide-bg-hover);
 
+  display: flex;
+  min-width: 0;
+
   &--visible {
     animation: resource-card-in .42s ease forwards;
   }
@@ -26,7 +29,8 @@
     --resource-card-icon-bg-hover: var(--color-resource-window-bg-hover);
   }
 
-  &--fireside-chat {
+  &--fireside-chat,
+  &--fireside-chats {
     --resource-card-icon-bg: var(--color-resource-fireside-chat-bg);
     --resource-card-icon-bg-hover: var(--color-resource-fireside-chat-bg-hover);
   }
@@ -37,8 +41,11 @@
     border-radius: 1.4rem;
     color: var(--color-resource-accent-deep);
     display: flex;
+    flex: 1;
     flex-direction: column;
-    min-height: 28rem;
+    height: 100%;
+    min-width: 0;
+    min-height: 32rem;
     overflow: hidden;
     padding: 2.2rem;
     position: relative;
@@ -57,7 +64,7 @@
         background-color: var(--resource-card-icon-bg-hover);
       }
 
-      .resource-card__download-icon {
+      .resource-card__action-icon {
         transform: scale(1.16);
       }
     }
@@ -171,7 +178,7 @@
     gap: .5rem;
   }
 
-  &__download-icon {
+  &__action-icon {
     fill: currentColor;
     height: 1.2rem;
     transition: transform .22s ease;
@@ -179,20 +186,21 @@
   }
 }
 
+.resources-page--enhanced .resource-card {
+  opacity: 0;
+  transform: translateY(2rem);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .resources-page--enhanced .resource-card,
   .resource-card--visible,
   .resource-card__link,
-  .resource-card__download-icon {
+  .resource-card__action-icon {
     animation: none;
+    opacity: 1;
     transform: none;
     transition: none;
   }
-}
-
-.resources-page--enhanced .resource-card {
-  opacity: 0;
-  transform: translateY(2rem);
 }
 
 @keyframes resource-card-in {
